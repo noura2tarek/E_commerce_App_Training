@@ -1,7 +1,8 @@
+import 'package:e_commerce_app/core/themes/app_colors.dart';
 import 'package:flutter/material.dart';
 
 ThemeData lightTheme = ThemeData(
-  primarySwatch:Colors.indigo,
+  primarySwatch: AppColors.primaryColor,
   appBarTheme: const AppBarTheme(
     titleSpacing: 20.0,
     backgroundColor: Colors.white,
@@ -16,11 +17,11 @@ ThemeData lightTheme = ThemeData(
     ),
   ),
   floatingActionButtonTheme: const FloatingActionButtonThemeData(
-    backgroundColor:Colors.black,
+    backgroundColor: AppColors.primaryColor,
   ),
   bottomNavigationBarTheme: const BottomNavigationBarThemeData(
     type: BottomNavigationBarType.fixed,
-    selectedItemColor: Colors.black,
+    selectedItemColor: AppColors.primaryColor,
     elevation: 20.0,
     backgroundColor: Colors.white,
   ),

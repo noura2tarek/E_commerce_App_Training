@@ -39,7 +39,7 @@ class RegisterCubit extends Cubit<RegisterState> {
   }) {
     emit(RegisterLoadingState());
     DioHelper.postData(
-      url: ApiConstants.RegisterPath,
+      url: ApiConstants.registerPath,
       data: {
         "name": name,
         "email": email,

@@ -1,28 +1,28 @@
 import 'package:flutter/material.dart';
 
 class DefaultFormField extends StatelessWidget {
-  TextInputType type;
-  TextEditingController controller;
-  String? label;
-  String? hint;
-  IconData? preficon;
-  IconData? sufficon;
-  String? Function(String?)? validator;
-  InputBorder? inputBorder;
-  Color? fillColor;
-  Color? labelColor;
-  Color? hintColor;
-  Color? cursorColor;
-  Color? prefixColor;
-  double? prefixIconSize;
-  void Function()? suffixPreesed;
-  void Function(String)? onSubmit;
-  void Function(String)? onChange;
-  TextStyle? style;
-  bool isObsecure;
-  void Function()? onTab;
+  final TextInputType type;
+  final TextEditingController controller;
+  final String? label;
+  final String? hint;
+  final IconData? preficon;
+  final IconData? sufficon;
+  final String? Function(String?)? validator;
+  final Color? fillColor;
+  final Color? labelColor;
+  final Color? hintColor;
+  final Color? cursorColor;
+  final Color? prefixColor;
+  final double? prefixIconSize;
+  final void Function()? suffixPreesed;
+  final void Function(String)? onSubmit;
+  final void Function(String)? onChange;
+  final TextStyle? style;
+  final bool isObsecure;
+  final void Function()? onTab;
 
-  DefaultFormField({super.key,
+  DefaultFormField({
+    super.key,
     required this.type,
     required this.controller,
     this.label,
@@ -30,7 +30,6 @@ class DefaultFormField extends StatelessWidget {
     this.preficon,
     this.sufficon,
     this.validator,
-    this.inputBorder,
     this.fillColor,
     this.labelColor,
     this.hintColor,
@@ -47,44 +46,43 @@ class DefaultFormField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  TextFormField(
-      style: style,
-      keyboardType: type,
-      controller: controller,
-      validator: validator,
-      obscureText: isObsecure,
-      cursorColor: cursorColor,
-      decoration: InputDecoration(
-        fillColor: fillColor,
-        labelStyle: TextStyle(
-          color: labelColor,
-        ),
-        border: inputBorder,
-        labelText: label,
-        hintText: hint,
-        hintStyle: TextStyle(
-          color: hintColor,
-        ),
-        prefixIcon: Icon(
-          preficon,
-          color: prefixColor,
-          size: prefixIconSize,
-        ),
-        suffixIcon: IconButton(
-          icon: Icon(
-            sufficon,
+    return Container(
+      height: 50.0,
+      child: TextFormField(
+        style: style,
+        keyboardType: type,
+        controller: controller,
+        validator: validator,
+        obscureText: isObsecure,
+        cursorColor: cursorColor,
+        decoration: InputDecoration(
+          fillColor: fillColor,
+          labelStyle: TextStyle(
+            color: labelColor,
+            fontSize: 14.0,
           ),
-          onPressed: suffixPreesed,
+          border: OutlineInputBorder(borderRadius: BorderRadius.circular(8.0)),
+          labelText: label,
+          hintText: hint,
+          hintStyle: TextStyle(
+            color: hintColor,
+          ),
+          prefixIcon: Icon(
+            preficon,
+            color: prefixColor,
+            size: prefixIconSize,
+          ),
+          suffixIcon: IconButton(
+            icon: Icon(
+              sufficon,
+            ),
+            onPressed: suffixPreesed,
+          ),
         ),
+        onTap: onTab,
+        onFieldSubmitted: onSubmit,
+        onChanged: onChange,
       ),
-      onTap: onTab,
-      onFieldSubmitted: onSubmit,
-      onChanged: onChange,
     );
   }
 }
-
-
-
-
-

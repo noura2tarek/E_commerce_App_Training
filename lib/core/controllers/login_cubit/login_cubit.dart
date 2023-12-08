@@ -1,8 +1,6 @@
 import 'package:e_commerce_app/core/network/api_constants.dart';
-import 'package:e_commerce_app/models/user_register_model.dart';
 import 'package:flutter/materiaL.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../../../models/user_login_model.dart';
 import '../../network/remote/dio_helper.dart';
 
@@ -24,7 +22,7 @@ class LoginCubit extends Cubit<LoginState> {
   }) {
     emit(LoginLoadingState());
     DioHelper.postData(
-      url: ApiConstants.LoginPath,
+      url: ApiConstants.loginPath,
       data: {
         "email": email,
         "password": password,
