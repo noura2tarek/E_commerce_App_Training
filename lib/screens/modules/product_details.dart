@@ -14,7 +14,7 @@ class ProductDetails extends StatelessWidget {
         title: const Text("Product"),
         leading: IconButton(
           onPressed: () => Navigator.pop(context),
-          icon: Icon(Icons.arrow_back_ios),
+          icon: const Icon(Icons.arrow_back_ios),
         ),
       ),
       body: Column(
@@ -24,6 +24,7 @@ class ProductDetails extends StatelessWidget {
             children: [
               /////////// product image //////
               Container(
+                color: Colors.grey[200],
                 padding: const EdgeInsetsDirectional.all(18.0),
                 height: 250.0,
                 width: double.infinity,
@@ -36,7 +37,7 @@ class ProductDetails extends StatelessWidget {
               ),
               //////////// product name //////
               Container(
-                padding: const EdgeInsetsDirectional.all(11.0),
+                padding: const EdgeInsetsDirectional.symmetric(vertical: 11.0),
                 width: double.infinity,
                 color: Colors.deepPurple.withOpacity(0.3),
                 alignment: AlignmentDirectional.center,

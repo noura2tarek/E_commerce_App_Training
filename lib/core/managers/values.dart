@@ -6,3 +6,4 @@ bool? onBoarding ;
 String? token;
 String? loginToken;
 Widget? startWidget;
+String? nationalId;

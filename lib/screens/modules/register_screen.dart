@@ -31,6 +31,13 @@ class RegisterScreen extends StatelessWidget {
         if (state is RegisterSuccessState) {
           if (state.registerModel.status == "success") {
             CacheHelper.savaData(
+              key: 'userId',
+              value: state.registerModel.user!.nationalId,
+            ).then((value) {
+              nationalId = state.registerModel.user!.nationalId;
+            });
+
+            CacheHelper.savaData(
               key: 'token',
               value: state.registerModel.user!.token,
             ).then((value) {

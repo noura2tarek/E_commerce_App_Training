@@ -4,6 +4,7 @@ import 'package:e_commerce_app/core/controllers/on_boarding_cubit/on_boarding_cu
 import 'package:e_commerce_app/core/controllers/products_cubit/products_cubit.dart';
 import 'package:e_commerce_app/core/controllers/register_cubit/register_cubit.dart';
 import 'package:e_commerce_app/core/network/local/cache_helper.dart';
+import 'package:e_commerce_app/core/themes/app_colors.dart';
 import 'package:e_commerce_app/screens/modules/home_screen.dart';
 import 'package:e_commerce_app/screens/modules/login_screen.dart';
 import 'package:e_commerce_app/screens/modules/on_boarding_screen.dart';
@@ -23,8 +24,9 @@ void main() async{
   DioHelper.init();
   onBoarding = CacheHelper.getData(key: "boarding") as bool?;
   token = CacheHelper.getData(key: "token") as String?;
+  nationalId = CacheHelper.getData(key: "userId") as String?;
   loginToken = CacheHelper.getData(key: "loginToken") as String?;
-  print(onBoarding);
+  print('boardingVar is $onBoarding');
 
   if(onBoarding != null){
     if(token != null || loginToken != null ){
@@ -59,7 +61,7 @@ class MyApp extends StatelessWidget {
         title: 'E_Commerce_App',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.purple),
+          colorScheme: ColorScheme.fromSeed(seedColor: AppColors.primaryColor),
 
           useMaterial3: true,
         ),
