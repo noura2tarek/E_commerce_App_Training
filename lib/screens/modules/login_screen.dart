@@ -3,7 +3,7 @@ import 'package:e_commerce_app/core/controllers/login_cubit/login_cubit.dart';
 import 'package:e_commerce_app/core/themes/app_colors.dart';
 import 'package:e_commerce_app/screens/modules/register_screen.dart';
 import 'package:e_commerce_app/screens/widgets/default_button.dart';
-import 'package:e_commerce_app/screens/widgets/navigator.dart';
+import 'package:e_commerce_app/core/managers/navigator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../core/managers/values.dart';

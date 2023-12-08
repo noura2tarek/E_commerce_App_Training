@@ -10,7 +10,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../core/managers/values.dart';
 import '../../core/network/local/cache_helper.dart';
 import '../widgets/default_form_field.dart';
-import '../widgets/navigator.dart';
+import '../../core/managers/navigator.dart';
 import '../widgets/show_toast.dart';
 import 'home_screen.dart';
 

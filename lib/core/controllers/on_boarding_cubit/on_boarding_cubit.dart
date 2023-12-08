@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
 
-import '../../../screens/widgets/navigator.dart';
+import '../../managers/navigator.dart';
 
 part 'on_boarding_state.dart';
 
