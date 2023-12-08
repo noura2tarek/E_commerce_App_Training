@@ -21,7 +21,7 @@ class DefaultFormField extends StatelessWidget {
   final bool isObsecure;
   final void Function()? onTab;
 
-  DefaultFormField({
+  const DefaultFormField({
     super.key,
     required this.type,
     required this.controller,
