@@ -1,4 +1,3 @@
-import 'package:e_commerce_app/core/themes/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class DefaultButton extends StatelessWidget {
@@ -11,12 +10,13 @@ class DefaultButton extends StatelessWidget {
   final AlignmentGeometry alignment;
   final Function function;
 
-  const DefaultButton({super.key,
+  DefaultButton({
+    super.key,
     this.width = 150.0,
-    this.backgroundColor = AppColors.primaryColor,
+    required this.backgroundColor,
     this.borderColor = Colors.transparent,
     this.isUpperCase = true,
-    this.radius = 10.0,
+    this.radius = 15.0,
     required this.text,
     required this.function,
     required this.alignment,
@@ -32,9 +32,9 @@ class DefaultButton extends StatelessWidget {
         decoration: BoxDecoration(
           border: Border.all(color: borderColor),
           borderRadius: BorderRadius.circular(radius),
-          color: backgroundColor,
         ),
         child: MaterialButton(
+          color: backgroundColor,
           onPressed: () {
             function();
           },

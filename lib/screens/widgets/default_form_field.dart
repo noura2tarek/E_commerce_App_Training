@@ -47,7 +47,7 @@ class DefaultFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 50.0,
+      height: 58.0,
       child: TextFormField(
         style: style,
         keyboardType: type,

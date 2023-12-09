@@ -24,7 +24,7 @@ Widget buildProductItem(ProductModel product, BuildContext context) => InkWell(
                     children: [
                       Expanded(
                         child: Container(
-                          decoration: const BoxDecoration(
+                          decoration:  BoxDecoration(
                               color: AppColors.primaryColor,
                               borderRadius: BorderRadius.only(
                                   topLeft: Radius.circular(20))),
@@ -153,7 +153,7 @@ Widget buildProductItem(ProductModel product, BuildContext context) => InkWell(
                               const Spacer(),
                               Container(
                                   height: 50,
-                                  decoration: const BoxDecoration(
+                                  decoration:  BoxDecoration(
                                       color: AppColors.primaryColor,
                                       borderRadius: BorderRadius.only(
                                           topLeft: Radius.circular(20),

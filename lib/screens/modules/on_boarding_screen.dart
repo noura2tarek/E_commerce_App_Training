@@ -18,9 +18,7 @@ class OnBoardingScreen extends StatelessWidget {
         var boardingCubit = OnBoardingCubit.get(context);
 
         return Scaffold(
-          appBar: AppBar(),
-          body: Padding(
-            padding: const EdgeInsets.all(20.0),
+          body: SafeArea(
             child: Column(
               children: [
                 /////////******* Page view *********//////////
@@ -46,23 +44,26 @@ class OnBoardingScreen extends StatelessWidget {
                   height: 10.0,
                 ),
                 ///////******** button ********/
-                Align(
-                  alignment: AlignmentDirectional.bottomEnd,
-                  child: FloatingActionButton(
-                      child: const Icon(
-                        Icons.arrow_forward_ios,
-                      ),
-                      onPressed: () {
-                        if (boardingCubit.isLastPage) {
-                          boardingCubit.submitToRegister(
-                              context: context, widgett: RegisterScreen());
-                        } else {
-                          boardController.nextPage(
-                            duration: const Duration(milliseconds: 500),
-                            curve: Curves.fastLinearToSlowEaseIn,
-                          );
-                        }
-                      }),
+                Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Align(
+                    alignment: AlignmentDirectional.bottomEnd,
+                    child: FloatingActionButton(
+                        child: const Icon(
+                          Icons.arrow_forward_ios,
+                        ),
+                        onPressed: () {
+                          if (boardingCubit.isLastPage) {
+                            boardingCubit.submitToRegister(
+                                context: context, widgett: RegisterScreen());
+                          } else {
+                            boardController.nextPage(
+                              duration: const Duration(milliseconds: 500),
+                              curve: Curves.fastLinearToSlowEaseIn,
+                            );
+                          }
+                        }),
+                  ),
                 ),
               ],
             ),

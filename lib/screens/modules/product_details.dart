@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:e_commerce_app/core/themes/app_colors.dart';
 import 'package:e_commerce_app/models/products_model.dart';
 import 'package:e_commerce_app/screens/widgets/default_button.dart';
 import 'package:flutter/materiaL.dart';
@@ -39,14 +40,13 @@ class ProductDetails extends StatelessWidget {
               Container(
                 padding: const EdgeInsetsDirectional.symmetric(vertical: 11.0),
                 width: double.infinity,
-                color: Colors.deepPurple.withOpacity(0.3),
+                color: AppColors.primaryColor.withOpacity(0.3),
                 alignment: AlignmentDirectional.center,
                 child: Text(
                   product.name!,
                   style: Theme.of(context)
                       .textTheme
-                      .bodyLarge!
-                      .copyWith(fontSize: 18.0, fontWeight: FontWeight.w500),
+                      .bodyLarge,
                 ),
               ),
             ],
@@ -55,7 +55,7 @@ class ProductDetails extends StatelessWidget {
             height: 40.0,
           ),
           Padding(
-            padding: EdgeInsetsDirectional.only(top: 16.0 , start: 16.0, end: 16.0),
+            padding: const EdgeInsetsDirectional.only(top: 16.0 , start: 16.0, end: 16.0),
             child: Row(
               children: [
                 Text(' Price -->>  ', style: Theme.of(context)
@@ -98,6 +98,7 @@ class ProductDetails extends StatelessWidget {
           ),
           //////// Add to cart button ///////
           DefaultButton(
+              backgroundColor: AppColors.primaryColor,
               text: 'ADD TO CART',
               function: () {},
               alignment: AlignmentDirectional.bottomCenter),

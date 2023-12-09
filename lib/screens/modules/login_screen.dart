@@ -58,11 +58,7 @@ class LoginScreen extends StatelessWidget {
                         'Welcome back!',
                         style: Theme.of(context)
                             .textTheme
-                            .headlineMedium
-                            ?.copyWith(
-                              color: Colors.black,
-                              fontWeight: FontWeight.w500,
-                            ),
+                            .headlineMedium,
                       ),
                       const SizedBox(
                         height: 5.0,
@@ -71,8 +67,7 @@ class LoginScreen extends StatelessWidget {
                         'Login now to browse our hot offers',
                         style: Theme.of(context)
                             .textTheme
-                            .bodySmall!
-                            .copyWith(fontSize: 13.0, color: Colors.grey[600]),
+                            .bodySmall,
                       ),
                       ///// End of title of page /////
                       const SizedBox(
@@ -118,14 +113,15 @@ class LoginScreen extends StatelessWidget {
                       /////*******  end of form fields  ******////////
                       ///
                       TextButton(
+                        style: ButtonStyle(
+                          foregroundColor: MaterialStateProperty.all(AppColors.primaryColor),
+                        ),
                         onPressed: () {},
                         child: Text(
                           'Forgot password?',
                           style: Theme.of(context)
                               .textTheme
-                              .bodySmall!
-                              .copyWith(
-                                  fontSize: 13.0, color: Colors.grey[600]),
+                              .bodySmall!.copyWith(color: AppColors.primaryColor),
                         ),
                       ),
                       const SizedBox(
@@ -138,6 +134,7 @@ class LoginScreen extends StatelessWidget {
                         builder: (context) {
                           return DefaultButton(
                             alignment: AlignmentDirectional.bottomEnd,
+                            backgroundColor: AppColors.primaryColor,
                             text: 'Login',
                             function: () {
                               if (formKey.currentState!.validate()) {
@@ -161,7 +158,7 @@ class LoginScreen extends StatelessWidget {
                               ),
                               child: MaterialButton(
                                 onPressed: () {},
-                                child: const CircularProgressIndicator(
+                                child: CircularProgressIndicator(
                                   color: Colors.white,
                                   backgroundColor:AppColors.primaryColor,
                                 ),

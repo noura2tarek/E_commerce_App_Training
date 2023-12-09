@@ -6,9 +6,9 @@ import 'package:e_commerce_app/screens/modules/login_screen.dart';
 import 'package:e_commerce_app/screens/widgets/default_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../../core/managers/values.dart';
 import '../../core/network/local/cache_helper.dart';
+import '../../core/themes/app_colors.dart';
 import '../widgets/default_form_field.dart';
 import '../../core/managers/navigator.dart';
 import '../widgets/show_toast.dart';
@@ -70,10 +70,7 @@ class RegisterScreen extends StatelessWidget {
                     ///// Title of page /////
                     Text(
                       'Register',
-                      style: Theme.of(context)
-                          .textTheme
-                          .headlineMedium!
-                          .copyWith(fontWeight: FontWeight.w500),
+                      style: Theme.of(context).textTheme.headlineMedium,
                     ),
                     ///// End of title of page /////
                     const SizedBox(
@@ -84,9 +81,9 @@ class RegisterScreen extends StatelessWidget {
                     ConditionalBuilder(
                       condition: (cubit.image != null),
                       builder: (context) {
-                        return  Padding(
+                        return Padding(
                           padding:
-                          const EdgeInsetsDirectional.only(bottom: 7.0),
+                              const EdgeInsetsDirectional.only(bottom: 7.0),
                           child: GestureDetector(
                             onTap: () {
                               cubit.pickImage();
@@ -123,8 +120,8 @@ class RegisterScreen extends StatelessWidget {
                                   imageUrl: AppImages.defaultNetworkImage,
                                   placeholder: (context, url) =>
                                       Container(color: Colors.grey[300]),
-                                  errorWidget: (context, url,
-                                      error) => const Icon(Icons.error),
+                                  errorWidget: (context, url, error) =>
+                                      const Icon(Icons.error),
                                   width: 100.0,
                                   height: 100.0,
                                   fit: BoxFit.cover,
@@ -136,7 +133,7 @@ class RegisterScreen extends StatelessWidget {
                       },
                     ),
                     const SizedBox(
-                      height: 9.0,
+                      height: 15.0,
                     ),
                     /////******* form fields ******////////
                     DefaultFormField(
@@ -233,34 +230,39 @@ class RegisterScreen extends StatelessWidget {
                       condition: state is! RegisterLoadingState,
                       builder: (context) {
                         return DefaultButton(
-                          alignment: AlignmentDirectional.bottomEnd,
+                          backgroundColor: AppColors.primaryColor,
                           text: 'Register',
-                          function: () {
+                          function: (){
                             if (formKey.currentState!.validate()) {
                               cubit.userRegister(
                                 name: nameController.text,
                                 email: emailController.text,
                                 password: passwordController.text,
-                                phone: phoneController.text,
                                 nationalId: nationalIdController.text,
+                                phone: phoneController.text,
+
                               );
                             }
                           },
+                          alignment: AlignmentDirectional.bottomEnd,
                         );
                       },
                       fallback: (context) {
-                        return Container(
-                          width: double.infinity,
-                          height: 50.0,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(6.0),
-                            color: Colors.purple,
-                          ),
-                          child: MaterialButton(
-                            onPressed: () {},
-                            child: const CircularProgressIndicator(
-                              color: Colors.white,
-                              backgroundColor: Colors.purple,
+                        return Align(
+                          alignment: AlignmentDirectional.bottomEnd,
+                          child: Container(
+                            width: double.infinity,
+                            height: 50.0,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(6.0),
+                              color: AppColors.primaryColor,
+                            ),
+                            child: MaterialButton(
+                              onPressed: (){},
+                              child: CircularProgressIndicator(
+                                color: Colors.white,
+                                backgroundColor: AppColors.primaryColor,
+                              ),
                             ),
                           ),
                         );
@@ -276,8 +278,7 @@ class RegisterScreen extends StatelessWidget {
                         const Text('Already have an account?'),
                         TextButton(
                           onPressed: () {
-                            navigateAndFinishThisScreen(
-                                context, LoginScreen());
+                            navigateAndFinishThisScreen(context, LoginScreen());
                           },
                           child: const Text('Login'),
                         ),

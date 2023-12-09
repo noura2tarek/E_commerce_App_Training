@@ -68,7 +68,7 @@ class HomeScreen extends StatelessWidget {
               appBar: AppBar(
                 title: const Text('Products'),
               ),
-              body: const Center(
+              body:  Center(
                   child:
                       CircularProgressIndicator(color: AppColors.primaryColor)),
             );

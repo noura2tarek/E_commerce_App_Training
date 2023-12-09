@@ -1,19 +1,20 @@
 import '../../models/on_borading_model.dart';
 import 'images.dart';
+
 List<OnBoardingModel> boardingList = [
   OnBoardingModel(
     title: 'Shop Now!',
-    subtitle: 'Enjoy the offers',
-    image: AppImages.imagePath,
+    subtitle: 'Enjoy the offers.',
+    image: AppImages.image1Path,
   ),
   OnBoardingModel(
-    title: 'Shopping become easy!',
-    subtitle: "It's time to shop",
-    image: AppImages.imagePath,
+    title: 'Pay',
+    subtitle: "It's time to order.",
+    image: AppImages.image2Path,
   ),
   OnBoardingModel(
-    title: 'Get Started!',
-    subtitle: "let's start ",
-    image: AppImages.imagePath,
+    title: 'Delivery',
+    subtitle: "let's start! ",
+    image: AppImages.image3Path,
   ),
 ];

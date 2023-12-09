@@ -4,7 +4,8 @@ import 'package:e_commerce_app/core/controllers/on_boarding_cubit/on_boarding_cu
 import 'package:e_commerce_app/core/controllers/products_cubit/products_cubit.dart';
 import 'package:e_commerce_app/core/controllers/register_cubit/register_cubit.dart';
 import 'package:e_commerce_app/core/network/local/cache_helper.dart';
-import 'package:e_commerce_app/core/themes/app_colors.dart';
+import 'package:e_commerce_app/core/themes/theme_data/theme_data_dark.dart';
+import 'package:e_commerce_app/core/themes/theme_data/theme_data_light.dart';
 import 'package:e_commerce_app/screens/modules/home_screen.dart';
 import 'package:e_commerce_app/screens/modules/login_screen.dart';
 import 'package:e_commerce_app/screens/modules/on_boarding_screen.dart';
@@ -16,8 +17,7 @@ import 'core/controllers/bloc_observer/bloc_observer.dart';
 import 'core/managers/values.dart';
 import 'core/network/remote/dio_helper.dart';
 
-void main() async{
-
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Bloc.observer = MyBlocObserver();
   await CacheHelper.init();
@@ -28,17 +28,17 @@ void main() async{
   loginToken = CacheHelper.getData(key: "loginToken") as String?;
   print('boardingVar is $onBoarding');
 
-  if(onBoarding != null){
-    if(token != null || loginToken != null ){
-      if (loginToken != null){
+  if (onBoarding != null) {
+    if (token != null || loginToken != null) {
+      if (loginToken != null) {
         startWidget = HomeScreen();
-      } else{
+      } else {
         startWidget = LoginScreen();
       }
     } else {
       startWidget = RegisterScreen();
     }
-  }else{
+  } else {
     startWidget = OnBoardingScreen();
   }
   runApp(MyApp());
@@ -52,22 +52,28 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create:  (context) => OnBoardingCubit(),),
-        BlocProvider(create:  (context) => RegisterCubit(),),
-        BlocProvider(create:  (context) => LoginCubit(),),
-        BlocProvider(create:  (context) => ProductsCubit()..getHomeProducts(), lazy: false,),
+        BlocProvider(
+          create: (context) => OnBoardingCubit(),
+        ),
+        BlocProvider(
+          create: (context) => RegisterCubit(),
+        ),
+        BlocProvider(
+          create: (context) => LoginCubit(),
+        ),
+        BlocProvider(
+          create: (context) => ProductsCubit()..getHomeProducts(),
+          lazy: false,
+        ),
       ],
       child: MaterialApp(
         title: 'E_Commerce_App',
         debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: AppColors.primaryColor),
-
-          useMaterial3: true,
-        ),
-       home:  LoginScreen(),
+        themeMode: ThemeMode.light,
+        theme: lightTheme,
+        darkTheme: darkTheme,
+        home: OnBoardingScreen(),
       ),
     );
   }
 }
-
