@@ -19,10 +19,16 @@ class DefaultFormField extends StatelessWidget {
   final void Function(String)? onChange;
   final TextStyle? style;
   final bool isObsecure;
+  final InputBorder? border;
+  final double? height;
+  final double? labelSize;
   final void Function()? onTab;
 
   const DefaultFormField({
+    this.border,
     super.key,
+    this.height = 58.0,
+    this.labelSize = 14.0,
     required this.type,
     required this.controller,
     this.label,
@@ -46,8 +52,8 @@ class DefaultFormField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 58.0,
+    return SizedBox(
+      height: height,
       child: TextFormField(
         style: style,
         keyboardType: type,
@@ -59,13 +65,14 @@ class DefaultFormField extends StatelessWidget {
           fillColor: fillColor,
           labelStyle: TextStyle(
             color: labelColor,
-            fontSize: 14.0,
+            fontSize: labelSize,
           ),
-          border: OutlineInputBorder(borderRadius: BorderRadius.circular(8.0)),
+          border: border,
           labelText: label,
           hintText: hint,
           hintStyle: TextStyle(
             color: hintColor,
+            fontSize: 15.0,
           ),
           prefixIcon: Icon(
             preficon,

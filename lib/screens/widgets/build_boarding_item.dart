@@ -20,21 +20,19 @@ Widget buildOnBoardingItem(OnBoardingModel model) => Column(
           ),
         ),
         const SizedBox(
-          height: 80,
+          height: 60,
         ),
         Text(
           model.title.toUpperCase(),
           style:  TextStyle(fontWeight: FontWeight.w500, fontSize: 30.0, color:  HexColor('#5DB3C2')),
         ),
         const SizedBox(
-          height: 20,
+          height: 15,
         ),
         Text(
           model.subtitle,
           style: const TextStyle(fontSize: 16.0, color: Colors.grey),
         ),
-        const SizedBox(
-          height: 10,
-        ),
+
       ],
     );

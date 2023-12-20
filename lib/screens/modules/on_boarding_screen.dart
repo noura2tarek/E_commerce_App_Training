@@ -1,14 +1,17 @@
 import 'package:e_commerce_app/core/controllers/on_boarding_cubit/on_boarding_cubit.dart';
+import 'package:e_commerce_app/core/themes/app_colors.dart';
 import 'package:e_commerce_app/screens/modules/register_screen.dart';
+import 'package:e_commerce_app/screens/widgets/default_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../../core/managers/lists.dart';
 import '../widgets/build_boarding_item.dart';
 
 class OnBoardingScreen extends StatelessWidget {
   final boardController = PageController();
 
-  OnBoardingScreen({Key? key}) : super(key: key);
+  OnBoardingScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -40,29 +43,43 @@ class OnBoardingScreen extends StatelessWidget {
                   ),
                 ),
                 /////////******* End of Page view *********//////////
+
+                SmoothPageIndicator(
+                  controller: boardController,
+                  count: boardingList.length,
+                  effect: ExpandingDotsEffect(
+                    activeDotColor: AppColors.primaryColor,
+                    dotColor: Colors.grey,
+                    dotHeight: 10.0,
+                    dotWidth: 11.0,
+                  ),
+                ),
+
                 const SizedBox(
                   height: 10.0,
                 ),
+
                 ///////******** button ********/
                 Padding(
                   padding: const EdgeInsets.all(20.0),
-                  child: Align(
-                    alignment: AlignmentDirectional.bottomEnd,
-                    child: FloatingActionButton(
-                        child: const Icon(
-                          Icons.arrow_forward_ios,
-                        ),
-                        onPressed: () {
-                          if (boardingCubit.isLastPage) {
-                            boardingCubit.submitToRegister(
-                                context: context, widgett: RegisterScreen());
-                          } else {
-                            boardController.nextPage(
-                              duration: const Duration(milliseconds: 500),
-                              curve: Curves.fastLinearToSlowEaseIn,
-                            );
-                          }
-                        }),
+                  child: DefaultButton(
+                    alignment: AlignmentDirectional.center,
+                    text: "Get Started",
+                    isUpperCase: false,
+                    backgroundColor: AppColors.primaryColor,
+                    radius: 17.0,
+                    function: () {
+                      if (boardingCubit.isLastPage) {
+                        boardingCubit.submitToRegister(
+                            context: context, widgett: RegisterScreen());
+                      } else {
+                        boardController.nextPage(
+                          duration: const Duration(milliseconds: 500),
+                          curve: Curves.fastLinearToSlowEaseIn,
+                        );
+                      }
+                    },
+
                   ),
                 ),
               ],

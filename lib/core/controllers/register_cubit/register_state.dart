@@ -8,9 +8,9 @@ class ChangePasswordVisibilityState extends RegisterState {}
 
 class RegisterLoadingState extends RegisterState {}
 class RegisterSuccessState extends RegisterState {
-  final RegisterModel registerModel;
+  final UserModel userModel;
 
-  RegisterSuccessState(this.registerModel);
+  RegisterSuccessState(this.userModel);
 }
 class RegisterErrorState extends RegisterState {
   final String error;

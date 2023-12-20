@@ -9,7 +9,6 @@ class LoginModel{
     user = json['user'] != null ? LoginUserData.fromJson(json['user']) : null;
   }
 
-
 }
 
 class LoginUserData {

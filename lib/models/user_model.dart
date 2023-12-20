@@ -1,18 +1,18 @@
 // To receive response data after register and deal with it
 // we can appear an error message in the UI screen so the user know what the error, the email he entered or what.
-class RegisterModel {
+class UserModel {
   late String status;
   String? message;
-  RegisterUserData? user;
+  UserData? user;
 
-  RegisterModel.fromJson(Map<String, dynamic> json) {
+  UserModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     message = json['message'];
-    user = json['user'] != null ? RegisterUserData.fromJson(json['data']) : null;
+    user = json['user'] != null ? UserData.fromJson(json['user']) : null;
   }
 }
 
-class RegisterUserData {
+class UserData {
 
   String? name;
   String? email;
@@ -22,7 +22,7 @@ class RegisterUserData {
   String? profileImage;
   String? token;
 
-  RegisterUserData.fromJson(Map<String, dynamic> json) {
+  UserData.fromJson(Map<String, dynamic> json) {
     name = json['name'];
     email = json['email'];
     phone = json['phone'];
@@ -31,4 +31,5 @@ class RegisterUserData {
     profileImage = json['profileImage'];
     token = json['token'];
   }
+
 }

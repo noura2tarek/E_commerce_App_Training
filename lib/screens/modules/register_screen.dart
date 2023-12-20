@@ -6,6 +6,7 @@ import 'package:e_commerce_app/screens/modules/login_screen.dart';
 import 'package:e_commerce_app/screens/widgets/default_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../core/managers/app_strings.dart';
 import '../../core/managers/values.dart';
 import '../../core/network/local/cache_helper.dart';
 import '../../core/themes/app_colors.dart';
@@ -22,33 +23,33 @@ class RegisterScreen extends StatelessWidget {
   final nationalIdController = TextEditingController();
   final formKey = GlobalKey<FormState>();
 
-  RegisterScreen({Key? key}) : super(key: key);
+  RegisterScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<RegisterCubit, RegisterState>(
       listener: (context, state) {
         if (state is RegisterSuccessState) {
-          if (state.registerModel.status == "success") {
+          if (state.userModel.status == AppStrings.success) {
             CacheHelper.savaData(
-              key: 'userId',
-              value: state.registerModel.user!.nationalId,
+              key: AppStrings.userIdKey,
+              value: state.userModel.user!.nationalId,
             ).then((value) {
-              nationalId = state.registerModel.user!.nationalId;
+              nationalId = state.userModel.user!.nationalId;
             });
 
             CacheHelper.savaData(
-              key: 'token',
-              value: state.registerModel.user!.token,
+              key: AppStrings.tokenKey,
+              value: state.userModel.user!.token,
             ).then((value) {
-              token = state.registerModel.user!.token;
+              token = state.userModel.user!.token;
               print("token is  $token");
               navigateAndFinishThisScreen(context, HomeScreen());
             });
           } else {
-            print(state.registerModel.message!);
+            print(state.userModel.message!);
             showToast(
-              message: state.registerModel.message!,
+              message: state.userModel.message!,
               state: ToastStates.ERROR,
             );
           }
@@ -69,7 +70,7 @@ class RegisterScreen extends StatelessWidget {
                   children: [
                     ///// Title of page /////
                     Text(
-                      'Register',
+                      AppStrings.register,
                       style: Theme.of(context).textTheme.headlineMedium,
                     ),
                     ///// End of title of page /////
@@ -137,13 +138,15 @@ class RegisterScreen extends StatelessWidget {
                     ),
                     /////******* form fields ******////////
                     DefaultFormField(
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(8.0)),
                       controller: nameController,
                       type: TextInputType.name,
-                      label: 'Name',
+                      label: AppStrings.name,
                       preficon: Icons.person_outline,
                       validator: (String? value) {
                         if (value!.isEmpty) {
-                          return 'please enter your name';
+                          return AppStrings.enterName;
                         } else {
                           return null;
                         }
@@ -153,13 +156,15 @@ class RegisterScreen extends StatelessWidget {
                       height: 15.0,
                     ),
                     DefaultFormField(
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(8.0)),
                       controller: emailController,
                       type: TextInputType.emailAddress,
-                      label: 'Email Address',
+                      label: AppStrings.emailAddress,
                       preficon: Icons.email_outlined,
                       validator: (String? value) {
                         if (value!.isEmpty) {
-                          return 'please enter your email';
+                          return AppStrings.enterEmail;
                         } else {
                           return null;
                         }
@@ -169,9 +174,11 @@ class RegisterScreen extends StatelessWidget {
                       height: 15.0,
                     ),
                     DefaultFormField(
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(8.0)),
                       controller: passwordController,
                       type: TextInputType.visiblePassword,
-                      label: 'Password',
+                      label: AppStrings.password,
                       sufficon: cubit.icon,
                       suffixPreesed: () {
                         cubit.changePasswordVisibility();
@@ -180,9 +187,9 @@ class RegisterScreen extends StatelessWidget {
                       isObsecure: cubit.isObsecure,
                       validator: (String? value) {
                         if (value!.isEmpty) {
-                          return "password can't be blank";
+                          return AppStrings.emptyPassword;
                         } else if (value.length < 8) {
-                          return 'password is too short';
+                          return AppStrings.shortPassword;
                         } else {
                           return null;
                         }
@@ -192,13 +199,17 @@ class RegisterScreen extends StatelessWidget {
                       height: 15.0,
                     ),
                     DefaultFormField(
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(8.0)),
                       controller: phoneController,
                       type: TextInputType.phone,
-                      label: 'Phone',
+                      label: AppStrings.phone,
                       preficon: Icons.phone_outlined,
                       validator: (String? value) {
                         if (value!.isEmpty) {
-                          return 'please enter your phone';
+                          return AppStrings.enterPhone;
+                        } else if (value.length != 11) {
+                          return AppStrings.validPhone;
                         } else {
                           return null;
                         }
@@ -208,13 +219,15 @@ class RegisterScreen extends StatelessWidget {
                       height: 15.0,
                     ),
                     DefaultFormField(
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(8.0)),
                       controller: nationalIdController,
                       type: TextInputType.number,
-                      label: 'National Id',
+                      label: AppStrings.nationalId,
                       preficon: Icons.numbers_outlined,
                       validator: (String? value) {
                         if (value!.isEmpty) {
-                          return 'please enter your national Id';
+                          return AppStrings.enterNational;
                         } else {
                           return null;
                         }
@@ -231,8 +244,8 @@ class RegisterScreen extends StatelessWidget {
                       builder: (context) {
                         return DefaultButton(
                           backgroundColor: AppColors.primaryColor,
-                          text: 'Register',
-                          function: (){
+                          text: AppStrings.register,
+                          function: () {
                             if (formKey.currentState!.validate()) {
                               cubit.userRegister(
                                 name: nameController.text,
@@ -240,7 +253,6 @@ class RegisterScreen extends StatelessWidget {
                                 password: passwordController.text,
                                 nationalId: nationalIdController.text,
                                 phone: phoneController.text,
-
                               );
                             }
                           },
@@ -258,7 +270,7 @@ class RegisterScreen extends StatelessWidget {
                               color: AppColors.primaryColor,
                             ),
                             child: MaterialButton(
-                              onPressed: (){},
+                              onPressed: () {},
                               child: CircularProgressIndicator(
                                 color: Colors.white,
                                 backgroundColor: AppColors.primaryColor,
@@ -275,12 +287,12 @@ class RegisterScreen extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Text('Already have an account?'),
+                        const Text(AppStrings.haveAccount),
                         TextButton(
                           onPressed: () {
                             navigateAndFinishThisScreen(context, LoginScreen());
                           },
-                          child: const Text('Login'),
+                          child: const Text(AppStrings.login),
                         ),
                       ],
                     ),

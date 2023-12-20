@@ -6,11 +6,14 @@ ThemeData lightTheme = ThemeData(
   useMaterial3: true,
   primaryColor: AppColors.primaryColor,
   primarySwatch: Colors.cyan,
-  inputDecorationTheme: InputDecorationTheme(
-
-    labelStyle: TextStyle(
-      fontSize: 15.0,
+  inputDecorationTheme:  InputDecorationTheme(
+    labelStyle: const TextStyle(
+      fontSize: 14.0,
       fontWeight: FontWeight.normal,
+    ),
+    hintStyle: TextStyle(
+      color: Colors.grey[850],
+      fontSize: 15.0,
     ),
   ),
 
@@ -33,7 +36,7 @@ ThemeData lightTheme = ThemeData(
     titleTextStyle: TextStyle(
       color: Colors.black,
       fontSize: 20.0,
-      fontWeight: FontWeight.w500,
+      fontWeight: FontWeight.bold,
     ),
     iconTheme: IconThemeData(
       color: Colors.black,
@@ -58,7 +61,7 @@ ThemeData lightTheme = ThemeData(
       fontSize: 13.0,
       color: Colors.grey[600],
     ),
-    headlineMedium: TextStyle(
+    headlineMedium: const TextStyle(
       color: Colors.black,
       fontWeight: FontWeight.w500,
 
@@ -69,7 +72,7 @@ ThemeData lightTheme = ThemeData(
       color: Colors.black,
     ),
 
-    titleMedium: TextStyle(
+    titleMedium: const TextStyle(
       fontWeight: FontWeight.w500,
       fontSize: 14.0,
       color: Colors.black,
@@ -77,4 +80,7 @@ ThemeData lightTheme = ThemeData(
     ),
   ),
   scaffoldBackgroundColor: Colors.white,
+  progressIndicatorTheme: ProgressIndicatorThemeData(
+    color: AppColors.progressIndicatorColor,
+  ),
 );

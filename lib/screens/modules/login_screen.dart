@@ -1,11 +1,13 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:e_commerce_app/core/controllers/login_cubit/login_cubit.dart';
 import 'package:e_commerce_app/core/themes/app_colors.dart';
+import 'package:e_commerce_app/screens/modules/forgot_password_screen.dart';
 import 'package:e_commerce_app/screens/modules/register_screen.dart';
 import 'package:e_commerce_app/screens/widgets/default_button.dart';
 import 'package:e_commerce_app/core/managers/navigator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../core/managers/app_strings.dart';
 import '../../core/managers/values.dart';
 import '../../core/network/local/cache_helper.dart';
 import '../widgets/default_form_field.dart';
@@ -24,12 +26,20 @@ class LoginScreen extends StatelessWidget {
     return BlocConsumer<LoginCubit, LoginState>(
       listener: (context, state) {
         if (state is LoginSuccessState) {
-          if (state.loginModel.status == "success") {
+          if (state.loginModel.status == AppStrings.success) {
             CacheHelper.savaData(
-              key: 'loginToken',
+              key: AppStrings.userIdKey,
+              value: state.loginModel.user!.nationalId,
+            ).then((value) {
+              nationalId = state.loginModel.user!.nationalId;
+            });
+            print("national id is $nationalId");
+
+            CacheHelper.savaData(
+              key: AppStrings.tokenKey,
               value: state.loginModel.user!.token,
             ).then((value) {
-              loginToken = state.loginModel.user!.token;
+              token = state.loginModel.user!.token;
               navigateAndFinishThisScreen(context, HomeScreen());
             });
           } else {
@@ -55,7 +65,7 @@ class LoginScreen extends StatelessWidget {
                     children: [
                       ///// title of page /////
                       Text(
-                        'Welcome back!',
+                        AppStrings.welcomeBack,
                         style: Theme.of(context)
                             .textTheme
                             .headlineMedium,
@@ -64,7 +74,7 @@ class LoginScreen extends StatelessWidget {
                         height: 5.0,
                       ),
                       Text(
-                        'Login now to browse our hot offers',
+                        AppStrings.loginNow,
                         style: Theme.of(context)
                             .textTheme
                             .bodySmall,
@@ -76,13 +86,14 @@ class LoginScreen extends StatelessWidget {
 
                       /////*******  form fields ******////////
                       DefaultFormField(
+                        border: OutlineInputBorder(borderRadius: BorderRadius.circular(8.0)),
                         type: TextInputType.emailAddress,
                         controller: emailController,
-                        label: 'Email Address',
+                        label: AppStrings.emailAddress,
                         preficon: Icons.email_outlined,
                         validator: (String? value) {
                           if (value!.isEmpty) {
-                            return 'please enter your email address';
+                            return AppStrings.enterEmail;
                           } else {
                             return null;
                           }
@@ -92,9 +103,10 @@ class LoginScreen extends StatelessWidget {
                         height: 15.0,
                       ),
                       DefaultFormField(
+                        border: OutlineInputBorder(borderRadius: BorderRadius.circular(8.0)),
                         type: TextInputType.visiblePassword,
                         controller: passwordController,
-                        label: 'Password',
+                        label: AppStrings.password,
                         sufficon: cubit.icon,
                         isObsecure: cubit.isObsecure,
                         suffixPreesed: () {
@@ -103,7 +115,7 @@ class LoginScreen extends StatelessWidget {
                         preficon: Icons.lock_outline,
                         validator: (String? value) {
                           if (value!.isEmpty) {
-                            return "password can't be blank";
+                            return AppStrings.emptyPassword;
                           } else {
                             return null;
                           }
@@ -111,14 +123,16 @@ class LoginScreen extends StatelessWidget {
                       ),
 
                       /////*******  end of form fields  ******////////
-                      ///
+                      /// forget password button
                       TextButton(
                         style: ButtonStyle(
                           foregroundColor: MaterialStateProperty.all(AppColors.primaryColor),
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          navigateToNextScreenNoAni(context: context, widget:  ForgotPasswordScreen());
+                        },
                         child: Text(
-                          'Forgot password?',
+                          AppStrings.forgotPassword,
                           style: Theme.of(context)
                               .textTheme
                               .bodySmall!.copyWith(color: AppColors.primaryColor),
@@ -135,7 +149,7 @@ class LoginScreen extends StatelessWidget {
                           return DefaultButton(
                             alignment: AlignmentDirectional.bottomEnd,
                             backgroundColor: AppColors.primaryColor,
-                            text: 'Login',
+                            text: AppStrings.login,
                             function: () {
                               if (formKey.currentState!.validate()) {
                                 cubit.userLogin(
@@ -174,9 +188,9 @@ class LoginScreen extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const Text('Don\'t have an account?'),
+                          const Text(AppStrings.dontHaveAccount),
                           TextButton(
-                              child: const Text('Register'),
+                              child: const Text(AppStrings.register),
                               onPressed: () {
                                 navigateAndFinishThisScreen(
                                     context, RegisterScreen());

@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 void navigateToNextScreen({required BuildContext context, required widget}) =>
     Navigator.of(context).push(SliderRight(page: widget));
 
+void navigateToNextScreenNoAni({required BuildContext context, required widget}) =>
+    Navigator.of(context).push(MaterialPageRoute(builder: (context) => widget,));
+
 void navigateAndFinishThisScreen(context, widget) =>
     Navigator.pushAndRemoveUntil(
       context,

@@ -1,23 +1,20 @@
-class LaptopsModel{
+class FavoritesModel{
   String? status;
-  String? message;
-  List<ProductModel>? products;
+  List<FavoriteProductModel>? favoriteProducts;
 
-  LaptopsModel({this.status, this.message, this.products});
-
-  LaptopsModel.fromJson(Map<String, dynamic> json) {
+  FavoritesModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
-    message = json['message'];
-    if (json['product'] != null) {
-      products = <ProductModel>[];
-      json['product'].forEach((v) {
-        products!.add( ProductModel.fromJson(v));
+    if (json['favoriteProducts'] != null) {
+      favoriteProducts = <FavoriteProductModel>[];
+      json['favoriteProducts'].forEach((v) {
+        favoriteProducts!.add(FavoriteProductModel.fromJson(v));
       });
     }
   }
 }
 
-class ProductModel {
+
+class FavoriteProductModel {
   String? sId;
   String? status;
   String? category;
@@ -30,7 +27,7 @@ class ProductModel {
   dynamic countInStock;
   dynamic iV;
 
-  ProductModel(
+  FavoriteProductModel(
       {this.sId,
         this.status,
         this.category,
@@ -43,7 +40,7 @@ class ProductModel {
         this.iV,
       });
 
-  ProductModel.fromJson(Map<String, dynamic> json) {
+  FavoriteProductModel.fromJson(Map<String, dynamic> json) {
     sId = json['_id'];
     status = json['status'];
     category = json['category'];

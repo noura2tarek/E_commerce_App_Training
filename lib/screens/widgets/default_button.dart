@@ -9,14 +9,16 @@ class DefaultButton extends StatelessWidget {
   final String text;
   final AlignmentGeometry alignment;
   final Function function;
+  final height;
 
-  DefaultButton({
+  const DefaultButton({
     super.key,
     this.width = 150.0,
+    this.height = 50.0,
     required this.backgroundColor,
     this.borderColor = Colors.transparent,
     this.isUpperCase = true,
-    this.radius = 15.0,
+    this.radius = 16.0,
     required this.text,
     required this.function,
     required this.alignment,
@@ -28,13 +30,15 @@ class DefaultButton extends StatelessWidget {
       alignment: alignment,
       child: Container(
         width: width,
-        height: 50.0,
+        height: height,
         decoration: BoxDecoration(
           border: Border.all(color: borderColor),
           borderRadius: BorderRadius.circular(radius),
+          color: backgroundColor,
         ),
         child: MaterialButton(
-          color: backgroundColor,
+          clipBehavior: Clip.antiAliasWithSaveLayer,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(radius)),
           onPressed: () {
             function();
           },
@@ -42,6 +46,8 @@ class DefaultButton extends StatelessWidget {
             isUpperCase ? text.toUpperCase() : text,
             style: const TextStyle(
               color: Colors.white,
+              fontWeight: FontWeight.w600,
+              fontSize: 15.0,
             ),
           ),
         ),

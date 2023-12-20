@@ -2,14 +2,12 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 
-import 'package:bloc/bloc.dart';
 import 'package:e_commerce_app/core/network/api_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:meta/meta.dart';
-
-import '../../../models/user_register_model.dart';
+import '../../../models/user_model.dart';
 import '../../network/remote/dio_helper.dart';
 
 part 'register_state.dart';
@@ -22,7 +20,7 @@ class RegisterCubit extends Cubit<RegisterState> {
 
   IconData icon = Icons.visibility_outlined;
   bool isObsecure = true;
-  late RegisterModel registerModel;
+  late UserModel registerModel;
   final ImagePicker picker = ImagePicker();
   File? image;
   Uint8List? bytes;
@@ -51,7 +49,7 @@ class RegisterCubit extends Cubit<RegisterState> {
       },
          lang: lang,
     ).then((value) {
-      registerModel = RegisterModel.fromJson(value.data);
+      registerModel = UserModel.fromJson(value.data);
       emit(RegisterSuccessState(registerModel));
     }).catchError((error) {
       print(error.toString());
