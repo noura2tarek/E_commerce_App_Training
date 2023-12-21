@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
-
 import '../../models/on_borading_model.dart';
 
 Widget buildOnBoardingItem(OnBoardingModel model) => Column(
-
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Container(
@@ -15,7 +13,6 @@ Widget buildOnBoardingItem(OnBoardingModel model) => Column(
             image: DecorationImage(
               image: AssetImage(model.image),
               fit: BoxFit.cover,
-
             ),
           ),
         ),
@@ -24,7 +21,10 @@ Widget buildOnBoardingItem(OnBoardingModel model) => Column(
         ),
         Text(
           model.title.toUpperCase(),
-          style:  TextStyle(fontWeight: FontWeight.w500, fontSize: 30.0, color:  HexColor('#5DB3C2')),
+          style: TextStyle(
+              fontWeight: FontWeight.w500,
+              fontSize: 30.0,
+              color: HexColor('#5DB3C2')),
         ),
         const SizedBox(
           height: 15,
@@ -33,6 +33,5 @@ Widget buildOnBoardingItem(OnBoardingModel model) => Column(
           model.subtitle,
           style: const TextStyle(fontSize: 16.0, color: Colors.grey),
         ),
-
       ],
     );
