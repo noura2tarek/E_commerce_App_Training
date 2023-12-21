@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
-
 import 'package:e_commerce_app/core/network/api_constants.dart';
 import 'package:e_commerce_app/core/network/remote/dio_helper.dart';
 import 'package:e_commerce_app/models/update_profile_model.dart';
@@ -10,7 +9,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:meta/meta.dart';
 import '../../managers/values.dart';
-
 part 'profile_state.dart';
 
 class ProfileCubit extends Cubit<ProfileState> {
@@ -32,7 +30,7 @@ class ProfileCubit extends Cubit<ProfileState> {
       print(profileModel!.user!.name!);
       emit(ProfileSuccessState());
     }).catchError((error) {
-      print("error occured in profile $error");
+      print("error occurred in profile $error");
       emit(ProfileErrorState());
     });
   }
@@ -82,7 +80,7 @@ class ProfileCubit extends Cubit<ProfileState> {
       },
     ).then((value) {
       print("value of update is ${value.data} ");
-     // profileModel = UserModel.fromJson(value.data);
+      updateModel = UpdateUserDataModel.fromJson(value.data);
       getUserData();
       emit(UpdateProfileSuccessState());
     }).catchError((error) {

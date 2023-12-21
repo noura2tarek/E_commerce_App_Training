@@ -45,7 +45,7 @@ Widget buildCartItem(CartProducts cartProduct, context) => Card(
                       Align(
                         alignment: AlignmentDirectional.bottomCenter,
                         child: Container(
-                          decoration:  BoxDecoration(
+                          decoration: BoxDecoration(
                             color: AppColors.secondColor,
                             borderRadius: const BorderRadiusDirectional.only(
                               bottomStart: Radius.circular(10.0),
@@ -158,7 +158,7 @@ Widget buildCartItem(CartProducts cartProduct, context) => Card(
                                 color: cartProduct.quantity != 1
                                     ? AppColors.primaryColor
                                     : AppColors.primaryColor.withOpacity(0.4),
-                                borderRadius: BorderRadius.circular(3)),
+                                borderRadius: BorderRadius.circular(3.0)),
                             height: 26.0,
                             width: 26.0,
                             child: const Icon(
@@ -189,7 +189,7 @@ Widget buildCartItem(CartProducts cartProduct, context) => Card(
                           child: Container(
                             decoration: BoxDecoration(
                                 color: AppColors.primaryColor,
-                                borderRadius: BorderRadius.circular(3)),
+                                borderRadius: BorderRadius.circular(3.0)),
                             height: 26,
                             width: 26,
                             child: const Icon(

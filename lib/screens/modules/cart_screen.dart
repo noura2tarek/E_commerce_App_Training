@@ -1,5 +1,6 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:e_commerce_app/screens/widgets/default_form_field.dart';
+import 'package:e_commerce_app/screens/widgets/default_text_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../core/controllers/cart_cubit/cart_cubit.dart';
@@ -47,74 +48,70 @@ class CartScreen extends StatelessWidget {
                             ),
                             itemCount: cubit.cartModel!.products!.length,
                           ),
-                          const SizedBox(
-                            height: 30.0,
+                        const SizedBox(
+                          height: 30.0,
+                        ),
+                        if (cubit.cartModel!.products!.isEmpty)
+                          Text(
+                            AppStrings.emptyCart,
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyLarge!
+                                .copyWith(fontSize: 20.0),
                           ),
                         if (cubit.cartModel!.products!.isEmpty)
-                         Text(
-                          AppStrings.emptyCart,
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyLarge!
-                              .copyWith(fontSize: 20.0),
-                        ),
-                        if (cubit.cartModel!.products!.isEmpty)
-                        const SizedBox(
-                          height: 15.0,
-                        ),
-
+                          const SizedBox(
+                            height: 15.0,
+                          ),
                         Padding(
                           padding: const EdgeInsets.all(10.0),
                           child: Container(
-                              height: 59.0,
-                              padding: const EdgeInsetsDirectional.all(8.0),
-                              decoration: BoxDecoration(
-                                color: Colors.grey[200],
-                                borderRadius: BorderRadius.circular(15.0),
-                              ),
-                              child: Row(
-                                children: [
-                                  Expanded(
-                                    child: Form(
-                                      key: formKey,
-                                      child: DefaultFormField(
-                                        height: 58.0,
-                                        border: InputBorder.none,
-                                        type: TextInputType.text,
-                                        controller: couponController,
-                                        hint: AppStrings.applyCode,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .bodySmall
-                                            ?.copyWith(
-                                                fontSize: 15.0,
-                                                color: Colors.grey[900]),
-                                        validator: (value) {
-                                          if (value!.isEmpty) {
-                                            return AppStrings.emptyCoupon;
-                                          } else {
-                                            return null;
-                                          }
-                                        },
-                                      ),
+                            height: 59.0,
+                            padding: const EdgeInsetsDirectional.all(8.0),
+                            decoration: BoxDecoration(
+                              color: Colors.grey[200],
+                              borderRadius: BorderRadius.circular(15.0),
+                            ),
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  child: Form(
+                                    key: formKey,
+                                    child: DefaultFormField(
+                                      height: 58.0,
+                                      border: InputBorder.none,
+                                      type: TextInputType.text,
+                                      controller: couponController,
+                                      hint: AppStrings.applyCode,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodySmall
+                                          ?.copyWith(
+                                              fontSize: 15.0,
+                                              color: Colors.grey[900]),
+                                      validator: (value) {
+                                        if (value!.isEmpty) {
+                                          return AppStrings.emptyCoupon;
+                                        } else {
+                                          return null;
+                                        }
+                                      },
                                     ),
                                   ),
-                                  TextButton(
-                                    onPressed: () {
-                                      if (formKey.currentState!.validate()) {
-                                       // print("coupon is empty");
-                                      }
-                                    },
-                                    child: const Text(
-                                      AppStrings.apply,
-                                      style: TextStyle(
-                                        fontSize: 16.0,
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),),
+                                ),
+                                DefaultTextButton(
+                                  text: AppStrings.apply,
+                                  fontSize: 16.0,
+                                  fontWeight: FontWeight.w500,
+                                  function: () {
+                                    if (formKey.currentState!.validate()) {
+                                      // print("coupon is empty");
+                                    }
+                                  },
+                                ),
+                              ],
+                            ),
+                          ),
                         ),
                         const SizedBox(
                           height: 10,

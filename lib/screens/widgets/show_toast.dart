@@ -15,6 +15,7 @@ void showToast({
     fontSize: 16.0,
   );
 }
+
 enum ToastStates { SUCCESS, WAENING, ERROR, NOTIFY }
 
 Color chooseToastColor(ToastStates state) {

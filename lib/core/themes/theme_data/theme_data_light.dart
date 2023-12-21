@@ -1,12 +1,11 @@
 import 'package:e_commerce_app/core/themes/app_colors.dart';
 import 'package:flutter/material.dart';
-import 'package:hexcolor/hexcolor.dart';
 
 ThemeData lightTheme = ThemeData(
   useMaterial3: true,
   primaryColor: AppColors.primaryColor,
   primarySwatch: Colors.cyan,
-  inputDecorationTheme:  InputDecorationTheme(
+  inputDecorationTheme: InputDecorationTheme(
     labelStyle: const TextStyle(
       fontSize: 14.0,
       fontWeight: FontWeight.normal,
@@ -16,18 +15,16 @@ ThemeData lightTheme = ThemeData(
       fontSize: 15.0,
     ),
   ),
-
   textButtonTheme: TextButtonThemeData(
     style: ButtonStyle(
-      foregroundColor: MaterialStateProperty.all(HexColor('#5DB3C2')),
-      textStyle :MaterialStateProperty.all(TextStyle(
-        color: HexColor('#5DB3C2'),
-      )),
+      foregroundColor: MaterialStateProperty.all(AppColors.primaryColor),
+      textStyle: MaterialStateProperty.all(
+        TextStyle(color: AppColors.primaryColor),
+      ),
     ),
   ),
   buttonTheme: ButtonThemeData(
-    colorScheme: ColorScheme.fromSeed(seedColor: AppColors.primaryColor)
-  ),
+      colorScheme: ColorScheme.fromSeed(seedColor: AppColors.primaryColor)),
   colorScheme: ColorScheme.fromSeed(seedColor: AppColors.primaryColor),
   appBarTheme: const AppBarTheme(
     titleSpacing: 20.0,
@@ -42,7 +39,7 @@ ThemeData lightTheme = ThemeData(
       color: Colors.black,
     ),
   ),
-  floatingActionButtonTheme:  FloatingActionButtonThemeData(
+  floatingActionButtonTheme: FloatingActionButtonThemeData(
     backgroundColor: Colors.white,
     foregroundColor: AppColors.floatingActionButtonColor,
     shape: RoundedRectangleBorder(
@@ -50,13 +47,13 @@ ThemeData lightTheme = ThemeData(
     ),
     elevation: 7.0,
   ),
-  bottomNavigationBarTheme:  BottomNavigationBarThemeData(
+  bottomNavigationBarTheme: BottomNavigationBarThemeData(
     type: BottomNavigationBarType.fixed,
     selectedItemColor: AppColors.primaryColor,
     elevation: 20.0,
     backgroundColor: Colors.white,
   ),
-  textTheme:  TextTheme(
+  textTheme: TextTheme(
     bodySmall: TextStyle(
       fontSize: 13.0,
       color: Colors.grey[600],
@@ -64,14 +61,12 @@ ThemeData lightTheme = ThemeData(
     headlineMedium: const TextStyle(
       color: Colors.black,
       fontWeight: FontWeight.w500,
-
     ),
     bodyLarge: const TextStyle(
       fontWeight: FontWeight.w500,
       fontSize: 18.0,
       color: Colors.black,
     ),
-
     titleMedium: const TextStyle(
       fontWeight: FontWeight.w500,
       fontSize: 14.0,

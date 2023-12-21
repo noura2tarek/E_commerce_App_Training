@@ -2,9 +2,10 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:e_commerce_app/core/controllers/profile_cubit/profile_cubit.dart';
 import 'package:e_commerce_app/screens/widgets/default_form_field.dart';
+import 'package:e_commerce_app/screens/widgets/default_text_button.dart';
 import 'package:flutter/materiaL.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../core/themes/app_colors.dart';
+import '../../core/managers/app_strings.dart';
 
 class EditProfile extends StatelessWidget {
   EditProfile({super.key});
@@ -12,7 +13,6 @@ class EditProfile extends StatelessWidget {
   final nameController = TextEditingController();
   final emailController = TextEditingController();
   final phoneController = TextEditingController();
-  final nationalIdController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -24,12 +24,11 @@ class EditProfile extends StatelessWidget {
         nameController.text = (userModel!.user!.name) ?? ' ';
         emailController.text = (userModel.user!.email) ?? ' ';
         phoneController.text = (userModel.user!.phone) ?? ' ';
-        nationalIdController.text = (userModel.user!.nationalId) ?? ' ';
 
         return Scaffold(
           appBar: AppBar(
             title: const Text(
-              "Edit Profile",
+              AppStrings.editProfile,
             ),
             leading: IconButton(
               onPressed: () => Navigator.pop(context),
@@ -39,22 +38,16 @@ class EditProfile extends StatelessWidget {
             actions: [
               Padding(
                 padding: const EdgeInsetsDirectional.only(end: 5.0),
-                child: TextButton(
-                  style: ButtonStyle(
-                    foregroundColor:
-                        MaterialStateProperty.all(AppColors.primaryColor),
-                  ),
-                  onPressed: () {
+                child: DefaultTextButton(
+                  text: AppStrings.edit,
+                  fontSize: 16.0,
+                  function: () {
                     cubit.updateUserData(
                       phone: phoneController.text,
                       email: emailController.text,
                       name: nameController.text,
                     );
                   },
-                  child: const Text(
-                    "Edit",
-                    style: TextStyle(fontSize: 17.0),
-                  ),
                 ),
               ),
             ],
@@ -151,7 +144,7 @@ class EditProfile extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsetsDirectional.only(start: 5.0),
                         child: Text(
-                          "Name",
+                          AppStrings.name,
                           style: Theme.of(context)
                               .textTheme
                               .bodyMedium!
@@ -186,7 +179,7 @@ class EditProfile extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsetsDirectional.only(start: 5.0),
                         child: Text(
-                          "Email",
+                          AppStrings.email,
                           style: Theme.of(context)
                               .textTheme
                               .bodyMedium!
@@ -221,7 +214,7 @@ class EditProfile extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsetsDirectional.only(start: 5.0),
                         child: Text(
-                          "Phone",
+                          AppStrings.phone,
                           style: Theme.of(context)
                               .textTheme
                               .bodyMedium!
@@ -251,38 +244,6 @@ class EditProfile extends StatelessWidget {
                       ),
                       const SizedBox(
                         height: 8.0,
-                      ),
-                      /////// National Id /////
-                      Padding(
-                        padding: const EdgeInsetsDirectional.only(start: 5.0),
-                        child: Text(
-                          "National Id",
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyMedium!
-                              .copyWith(fontSize: 15.0),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 5.0,
-                      ),
-                      Card(
-                        surfaceTintColor: Colors.white.withOpacity(0.7),
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: DefaultFormField(
-                            height: 32.0,
-                            controller: nationalIdController,
-                            border: InputBorder.none,
-                            type: TextInputType.number,
-                            preficon: Icons.person_outline,
-                            prefixColor: Colors.black38,
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodySmall!
-                                .copyWith(fontSize: 17.0),
-                          ),
-                        ),
                       ),
                     ],
                   ),

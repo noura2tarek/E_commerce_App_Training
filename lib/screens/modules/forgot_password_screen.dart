@@ -6,7 +6,6 @@ import '../widgets/default_form_field.dart';
 
 class ForgotPasswordScreen extends StatelessWidget {
   ForgotPasswordScreen({super.key});
-
   final passwordController = TextEditingController();
   final formKey = GlobalKey<FormState>();
 
@@ -15,7 +14,7 @@ class ForgotPasswordScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          "Forget Password",
+          AppStrings.forgetPassword,
         ),
         leading: IconButton(
           onPressed: () => Navigator.pop(context),
@@ -38,7 +37,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                 ),
                 ///////   New Password   /////
                 Text(
-                  "Enter New Password: ",
+                  AppStrings.enterNewPassword,
                   style: Theme.of(context)
                       .textTheme
                       .bodyMedium!

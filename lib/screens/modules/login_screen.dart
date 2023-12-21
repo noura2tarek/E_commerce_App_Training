@@ -5,6 +5,7 @@ import 'package:e_commerce_app/screens/modules/forgot_password_screen.dart';
 import 'package:e_commerce_app/screens/modules/register_screen.dart';
 import 'package:e_commerce_app/screens/widgets/default_button.dart';
 import 'package:e_commerce_app/core/managers/navigator.dart';
+import 'package:e_commerce_app/screens/widgets/default_text_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../core/managers/app_strings.dart';
@@ -66,18 +67,14 @@ class LoginScreen extends StatelessWidget {
                       ///// title of page /////
                       Text(
                         AppStrings.welcomeBack,
-                        style: Theme.of(context)
-                            .textTheme
-                            .headlineMedium,
+                        style: Theme.of(context).textTheme.headlineMedium,
                       ),
                       const SizedBox(
                         height: 5.0,
                       ),
                       Text(
                         AppStrings.loginNow,
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodySmall,
+                        style: Theme.of(context).textTheme.bodySmall,
                       ),
                       ///// End of title of page /////
                       const SizedBox(
@@ -86,7 +83,8 @@ class LoginScreen extends StatelessWidget {
 
                       /////*******  form fields ******////////
                       DefaultFormField(
-                        border: OutlineInputBorder(borderRadius: BorderRadius.circular(8.0)),
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8.0)),
                         type: TextInputType.emailAddress,
                         controller: emailController,
                         label: AppStrings.emailAddress,
@@ -103,7 +101,8 @@ class LoginScreen extends StatelessWidget {
                         height: 15.0,
                       ),
                       DefaultFormField(
-                        border: OutlineInputBorder(borderRadius: BorderRadius.circular(8.0)),
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8.0)),
                         type: TextInputType.visiblePassword,
                         controller: passwordController,
                         label: AppStrings.password,
@@ -124,19 +123,15 @@ class LoginScreen extends StatelessWidget {
 
                       /////*******  end of form fields  ******////////
                       /// forget password button
-                      TextButton(
-                        style: ButtonStyle(
-                          foregroundColor: MaterialStateProperty.all(AppColors.primaryColor),
-                        ),
-                        onPressed: () {
-                          navigateToNextScreenNoAni(context: context, widget:  ForgotPasswordScreen());
+                      DefaultTextButton(
+                        text: AppStrings.forgotPassword,
+                        fontSize: 13.0,
+                        function: () {
+                          navigateToNextScreenNoAni(
+                            context: context,
+                            widget: ForgotPasswordScreen(),
+                          );
                         },
-                        child: Text(
-                          AppStrings.forgotPassword,
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodySmall!.copyWith(color: AppColors.primaryColor),
-                        ),
                       ),
                       const SizedBox(
                         height: 25.0,
@@ -174,7 +169,7 @@ class LoginScreen extends StatelessWidget {
                                 onPressed: () {},
                                 child: CircularProgressIndicator(
                                   color: Colors.white,
-                                  backgroundColor:AppColors.primaryColor,
+                                  backgroundColor: AppColors.primaryColor,
                                 ),
                               ),
                             ),
@@ -189,12 +184,15 @@ class LoginScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           const Text(AppStrings.dontHaveAccount),
-                          TextButton(
-                              child: const Text(AppStrings.register),
-                              onPressed: () {
-                                navigateAndFinishThisScreen(
-                                    context, RegisterScreen());
-                              }),
+                          DefaultTextButton(
+                            text: AppStrings.register,
+                            function: () {
+                              navigateAndFinishThisScreen(
+                                context,
+                                RegisterScreen(),
+                              );
+                            },
+                          ),
                         ],
                       ),
                     ],

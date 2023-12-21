@@ -65,6 +65,7 @@ class LoginCubit extends Cubit<LoginState> {
       emit(ChangePasswordErrorState());
     });
   }
+
   //Log out method
   void logOut({ required BuildContext context}){
     DioHelper.postData(

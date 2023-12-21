@@ -4,6 +4,7 @@ import 'package:e_commerce_app/core/controllers/register_cubit/register_cubit.da
 import 'package:e_commerce_app/core/managers/images.dart';
 import 'package:e_commerce_app/screens/modules/login_screen.dart';
 import 'package:e_commerce_app/screens/widgets/default_button.dart';
+import 'package:e_commerce_app/screens/widgets/default_text_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../core/managers/app_strings.dart';
@@ -288,11 +289,14 @@ class RegisterScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         const Text(AppStrings.haveAccount),
-                        TextButton(
-                          onPressed: () {
-                            navigateAndFinishThisScreen(context, LoginScreen());
+                        DefaultTextButton(
+                          text: AppStrings.login,
+                          function: () {
+                            navigateAndFinishThisScreen(
+                              context,
+                              LoginScreen(),
+                            );
                           },
-                          child: const Text(AppStrings.login),
                         ),
                       ],
                     ),
