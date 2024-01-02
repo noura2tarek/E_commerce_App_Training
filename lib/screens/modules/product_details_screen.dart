@@ -6,6 +6,7 @@ import 'package:e_commerce_app/core/managers/app_strings.dart';
 import 'package:e_commerce_app/core/themes/app_colors.dart';
 import 'package:e_commerce_app/models/products_model.dart';
 import 'package:e_commerce_app/screens/widgets/default_button.dart';
+import 'package:e_commerce_app/screens/widgets/show_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../core/controllers/cart_cubit/cart_cubit.dart';
@@ -15,6 +16,7 @@ class ProductDetailsScreen extends StatelessWidget {
 
   final ProductModel product;
   final PageController pageController = PageController();
+  final carouselController = CarouselController();
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +35,7 @@ class ProductDetailsScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                //////////// product name //////
+                //////////// product name //////////
                 Padding(
                   padding: const EdgeInsets.all(15.0),
                   child: Row(
@@ -51,6 +53,10 @@ class ProductDetailsScreen extends StatelessWidget {
                         onTap: () {
                           FavouritesCubit.get(context)
                               .addToFavourites(productId: product.sId!);
+                          showToast(
+                            message: " Item added to favourites successfully ",
+                            state: ToastStates.SUCCESS,
+                          );
                         },
                         child: Container(
                           padding: const EdgeInsetsDirectional.all(5.0),
@@ -104,7 +110,7 @@ class ProductDetailsScreen extends StatelessWidget {
                 ),
 
                 // SmoothPageIndicator(
-                //   controller: boardController,
+                //   controller: carouselController,
                 //   count: product.images!.length,
                 //   effect: ExpandingDotsEffect(
                 //     activeDotColor: AppColors.primaryColor,
@@ -227,6 +233,9 @@ class ProductDetailsScreen extends StatelessWidget {
                           CartCubit.get(context).addToCart(
                             productId: product.sId!,
                           );
+                          showToast(
+                              message: " Item added successfully ",
+                              state: ToastStates.SUCCESS);
                         },
                         alignment: AlignmentDirectional.bottomCenter,
                       ),

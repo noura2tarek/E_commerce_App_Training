@@ -1,6 +1,7 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:e_commerce_app/core/controllers/profile_cubit/profile_cubit.dart';
 import 'package:e_commerce_app/core/managers/app_strings.dart';
+import 'package:e_commerce_app/core/themes/app_colors.dart';
 import 'package:e_commerce_app/screens/modules/favourites_screen.dart';
 import 'package:e_commerce_app/screens/modules/profile_screen.dart';
 import 'package:e_commerce_app/screens/widgets/build_product_item.dart';
@@ -16,9 +17,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<ProductsCubit, ProductsState>(
-      listener: (context, state) {
-
-      },
+      listener: (context, state) {},
       builder: (BuildContext context, ProductsState state) {
         var cubit = ProductsCubit.get(context);
 
@@ -34,40 +33,39 @@ class HomeScreen extends StatelessWidget {
                       BlocConsumer<ProfileCubit, ProfileState>(
                         listener: (context, state) {},
                         builder: (context, state) {
-                          var userModel = ProfileCubit.get(context).profileModel;
+                          var userModel =
+                              ProfileCubit.get(context).profileModel;
                           return Container(
-                            height: 85.0,
-                            padding: const EdgeInsetsDirectional.all(18.0),
-                            color: Colors.grey[300],
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "Hello, ${userModel?.user?.name}",
-                                  //the name of the user
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .titleMedium
-                                      ?.copyWith(
-                                        fontSize: 17.0,
-                                        color: Colors.black.withOpacity(0.7),
-                                      ),
-                                ),
-                                const SizedBox(
-                                  height: 4.0,
-                                ),
-                                Text(
-                                  "${userModel?.user?.email}",
-                                  //the email of the user
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .titleMedium
-                                      ?.copyWith(
-                                        fontSize: 13.0,
-                                        color: Colors.grey,
-                                      ),
-                                ),
-                              ],
+                            height: 83.0,
+                            padding: const EdgeInsetsDirectional.all(9.0),
+                            color: AppColors.primaryColor.withOpacity(0.2),
+                            child: ListTile(
+                              onTap: () => navigateToNextScreenNoAni(
+                                  context: context,
+                                  widget: const ProfileScreen()),
+                              selectedTileColor: AppColors.primaryColor,
+                              title: Text(
+                                "Hello, ${userModel?.user?.name}",
+                                //the name of the user
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .titleMedium
+                                    ?.copyWith(
+                                      fontSize: 17.0,
+                                      color: Colors.black.withOpacity(0.7),
+                                    ),
+                              ),
+                              subtitle: Text(
+                                "${userModel?.user?.email}",
+                                //the email of the user
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .titleMedium
+                                    ?.copyWith(
+                                      fontSize: 13.0,
+                                      color: Colors.grey,
+                                    ),
+                              ),
                             ),
                           );
                         },

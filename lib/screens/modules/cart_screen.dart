@@ -1,5 +1,4 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
-import 'package:e_commerce_app/screens/widgets/default_form_field.dart';
 import 'package:e_commerce_app/screens/widgets/default_text_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -67,7 +66,7 @@ class CartScreen extends StatelessWidget {
                           padding: const EdgeInsets.all(10.0),
                           child: Container(
                             height: 59.0,
-                            padding: const EdgeInsetsDirectional.all(8.0),
+                            padding: const EdgeInsetsDirectional.all(10.0),
                             decoration: BoxDecoration(
                               color: Colors.grey[200],
                               borderRadius: BorderRadius.circular(15.0),
@@ -77,25 +76,20 @@ class CartScreen extends StatelessWidget {
                                 Expanded(
                                   child: Form(
                                     key: formKey,
-                                    child: DefaultFormField(
-                                      height: 58.0,
-                                      border: InputBorder.none,
-                                      type: TextInputType.text,
+                                    child: TextField(
+                                      decoration: const InputDecoration(
+                                        border: InputBorder.none,
+                                        hintText: AppStrings.applyCode,
+                                      ),
+                                      keyboardType: TextInputType.text,
                                       controller: couponController,
-                                      hint: AppStrings.applyCode,
                                       style: Theme.of(context)
                                           .textTheme
                                           .bodySmall
                                           ?.copyWith(
-                                              fontSize: 15.0,
-                                              color: Colors.grey[900]),
-                                      validator: (value) {
-                                        if (value!.isEmpty) {
-                                          return AppStrings.emptyCoupon;
-                                        } else {
-                                          return null;
-                                        }
-                                      },
+                                            fontSize: 15.0,
+                                            color: Colors.grey[900],
+                                          ),
                                     ),
                                   ),
                                 ),

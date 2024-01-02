@@ -137,7 +137,7 @@ class LoginScreen extends StatelessWidget {
                         height: 25.0,
                       ),
 
-                      /////////    login button   /////////////
+                      /////////     login button    /////////////
                       ConditionalBuilder(
                         condition: state is! LoginLoadingState,
                         builder: (context) {

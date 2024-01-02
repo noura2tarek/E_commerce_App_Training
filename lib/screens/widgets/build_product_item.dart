@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:e_commerce_app/core/managers/app_strings.dart';
 import 'package:e_commerce_app/models/products_model.dart';
+import 'package:e_commerce_app/screens/widgets/show_toast.dart';
 import 'package:flutter/materiaL.dart';
 import '../../core/controllers/cart_cubit/cart_cubit.dart';
 import '../../core/managers/navigator.dart';
@@ -110,7 +111,7 @@ Widget buildProductItem(ProductModel productModel, BuildContext context) {
                               child: Container(
                                 alignment: AlignmentDirectional.center,
                                 height: 30.0,
-                                decoration:  BoxDecoration(
+                                decoration: BoxDecoration(
                                   color: AppColors.secondColor,
                                   borderRadius: const BorderRadius.horizontal(
                                     left: Radius.circular(20.0),
@@ -174,7 +175,13 @@ Widget buildProductItem(ProductModel productModel, BuildContext context) {
                             ),
                             child: MaterialButton(
                               onPressed: () {
-                                CartCubit.get(context).addToCart(productId: productModel.sId!,);
+                                CartCubit.get(context).addToCart(
+                                  productId: productModel.sId!,
+                                );
+                                showToast(
+                                    message:
+                                        " Item added to cart successfully ",
+                                    state: ToastStates.SUCCESS);
                               },
                               clipBehavior: Clip.antiAliasWithSaveLayer,
                               shape: const RoundedRectangleBorder(
