@@ -1,5 +1,4 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:e_commerce_app/core/controllers/favourites_cubit/favourites_cubit.dart';
 import 'package:e_commerce_app/core/controllers/products_cubit/products_cubit.dart';
 import 'package:e_commerce_app/core/managers/app_strings.dart';
@@ -9,6 +8,7 @@ import 'package:e_commerce_app/screens/widgets/default_button.dart';
 import 'package:e_commerce_app/screens/widgets/show_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../../core/controllers/cart_cubit/cart_cubit.dart';
 
 class ProductDetailsScreen extends StatelessWidget {
@@ -16,7 +16,6 @@ class ProductDetailsScreen extends StatelessWidget {
 
   final ProductModel product;
   final PageController pageController = PageController();
-  final carouselController = CarouselController();
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +34,7 @@ class ProductDetailsScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                //////////// product name //////////
+                /* ------------------- Product name & favourite icon ------------------- */
                 Padding(
                   padding: const EdgeInsets.all(15.0),
                   child: Row(
@@ -48,29 +47,46 @@ class ProductDetailsScreen extends StatelessWidget {
                             ?.copyWith(fontWeight: FontWeight.bold),
                       ),
                       const Spacer(),
-                      InkWell(
-                        borderRadius: BorderRadius.circular(5.0),
-                        onTap: () {
-                          FavouritesCubit.get(context)
-                              .addToFavourites(productId: product.sId!);
-                          showToast(
-                            message: " Item added to favourites successfully ",
-                            state: ToastStates.SUCCESS,
+                      BlocConsumer<FavouritesCubit, FavouritesState>(
+                        listener: (context, state) {
+                          if (state is AddToFavouritesSuccessState) {
+                            if (state.status == "success") {
+                              showToast(
+                                message:
+                                    " Item added to favourites successfully ",
+                                state: ToastStates.SUCCESS,
+                              );
+                            } else {
+                              showToast(
+                                message: " There is an error",
+                                state: ToastStates.ERROR,
+                              );
+                            }
+                          }
+                        },
+                        builder: (context, state) {
+                          return InkWell(
+                            borderRadius: BorderRadius.circular(5.0),
+                            onTap: () {
+                              FavouritesCubit.get(context)
+                                  .addToFavourites(productId: product.sId!);
+                            },
+                            child: Container(
+                              padding: const EdgeInsetsDirectional.all(5.0),
+                              decoration: BoxDecoration(
+                                borderRadius: const BorderRadiusDirectional.all(
+                                    Radius.circular(5.0)),
+                                color: Colors.grey[300],
+                              ),
+                              child: Icon(
+                                Icons.favorite,
+                                color: FavouritesCubit.get(context)
+                                    .changeColor(productId: product.sId!),
+                                size: 22.0,
+                              ),
+                            ),
                           );
                         },
-                        child: Container(
-                          padding: const EdgeInsetsDirectional.all(5.0),
-                          decoration: BoxDecoration(
-                            borderRadius: const BorderRadiusDirectional.all(
-                                Radius.circular(5.0)),
-                            color: Colors.grey[300],
-                          ),
-                          child: const Icon(
-                            Icons.favorite,
-                            color: Colors.grey,
-                            size: 22.0,
-                          ),
-                        ),
                       ),
                     ],
                   ),
@@ -78,48 +94,42 @@ class ProductDetailsScreen extends StatelessWidget {
                 const SizedBox(
                   height: 5.0,
                 ),
-                /////****************     Carousel Slider    **************////////
-                CarouselSlider(
-                  items: product.images
-                      ?.map(
-                        (e) => CachedNetworkImage(
-                          imageUrl: e,
-                          placeholder: (context, url) =>
-                              Container(color: Colors.grey[300]),
-                          errorWidget: (context, url, error) =>
-                              const Icon(Icons.error),
-                          width: double.infinity,
-                        ),
-                      )
-                      .toList(),
-                  options: CarouselOptions(
-                    height: 230.0,
-                    initialPage: 0,
-                    enableInfiniteScroll: true,
-                    autoPlay: false,
-                    autoPlayInterval: const Duration(
-                      seconds: 3,
-                    ),
-                    autoPlayAnimationDuration: const Duration(
-                      seconds: 1,
-                    ),
-                    autoPlayCurve: Curves.fastOutSlowIn,
-                    scrollDirection: Axis.horizontal,
-                    viewportFraction: 1.0, // the image takes the full width
+                /* ------------------- Page View ------------------- */
+                SizedBox(
+                  height: 150.0,
+                  child: PageView.builder(
+                    controller: pageController,
+                    itemBuilder: (context, index) {
+                      return CachedNetworkImage(
+                        imageUrl: product.images![index],
+                        placeholder: (context, url) =>
+                            Container(color: Colors.grey[300]),
+                        errorWidget: (context, url, error) =>
+                            const Icon(Icons.error),
+                        width: double.infinity,
+                      );
+                    },
+                    physics: const BouncingScrollPhysics(),
+                    itemCount: product.images?.length,
                   ),
                 ),
-
-                // SmoothPageIndicator(
-                //   controller: carouselController,
-                //   count: product.images!.length,
-                //   effect: ExpandingDotsEffect(
-                //     activeDotColor: AppColors.primaryColor,
-                //     dotColor: Colors.grey,
-                //     dotHeight: 10.0,
-                //     dotWidth: 11.0,
-                //   ),
-                // ),
-
+                const SizedBox(
+                  height: 15.0,
+                ),
+                /* ------------------- Smooth Page Indicator ------------------- */
+                Align(
+                  alignment: Alignment.center,
+                  child: SmoothPageIndicator(
+                    controller: pageController,
+                    count: product.images!.length,
+                    effect: ScrollingDotsEffect(
+                      activeDotColor: AppColors.primaryColor,
+                      dotColor: Colors.grey,
+                      dotHeight: 8.0,
+                      dotWidth: 9.0,
+                    ),
+                  ),
+                ),
                 const SizedBox(
                   height: 40.0,
                 ),
@@ -226,18 +236,34 @@ class ProductDetailsScreen extends StatelessWidget {
                         height: 40.0,
                       ),
                       ////////** Add to cart button **///////
-                      DefaultButton(
-                        backgroundColor: AppColors.primaryColor,
-                        text: AppStrings.addToCart,
-                        function: () {
-                          CartCubit.get(context).addToCart(
-                            productId: product.sId!,
-                          );
-                          showToast(
-                              message: " Item added successfully ",
-                              state: ToastStates.SUCCESS);
+                      BlocConsumer<CartCubit, CartStates>(
+                        listener: (context, state) {
+                          if (state is AddToCartSuccessState) {
+                            if (state.status == "success") {
+                              showToast(
+                                message: " Item added to Cart successfully ",
+                                state: ToastStates.SUCCESS,
+                              );
+                            } else {
+                              showToast(
+                                message: " There is an error",
+                                state: ToastStates.ERROR,
+                              );
+                            }
+                          }
                         },
-                        alignment: AlignmentDirectional.bottomCenter,
+                        builder: (context, state) {
+                          return DefaultButton(
+                            backgroundColor: AppColors.primaryColor,
+                            text: AppStrings.addToCart,
+                            function: () {
+                              CartCubit.get(context).addToCart(
+                                productId: product.sId!,
+                              );
+                            },
+                            alignment: AlignmentDirectional.bottomCenter,
+                          );
+                        },
                       ),
                       const SizedBox(
                         height: 10.0,

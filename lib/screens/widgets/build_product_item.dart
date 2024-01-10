@@ -3,6 +3,7 @@ import 'package:e_commerce_app/core/managers/app_strings.dart';
 import 'package:e_commerce_app/models/products_model.dart';
 import 'package:e_commerce_app/screens/widgets/show_toast.dart';
 import 'package:flutter/materiaL.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../core/controllers/cart_cubit/cart_cubit.dart';
 import '../../core/managers/navigator.dart';
 import '../../core/themes/app_colors.dart';
@@ -173,30 +174,46 @@ Widget buildProductItem(ProductModel productModel, BuildContext context) {
                                 bottomEnd: Radius.circular(20.0),
                               ),
                             ),
-                            child: MaterialButton(
-                              onPressed: () {
-                                CartCubit.get(context).addToCart(
-                                  productId: productModel.sId!,
-                                );
-                                showToast(
-                                    message:
-                                        " Item added to cart successfully ",
-                                    state: ToastStates.SUCCESS);
+                            child: BlocConsumer<CartCubit, CartStates>(
+                              listener: (context, state) {
+                                if(state is AddToCartSuccessState){
+                                  if (state.status == "success") {
+                                    showToast(
+                                      message:
+                                      " Item added to Cart successfully ",
+                                      state: ToastStates.SUCCESS,
+                                    );
+                                  } else {
+                                    showToast(
+                                      message: " There is an error",
+                                      state: ToastStates.ERROR,
+                                    );
+                                  }
+                                }
                               },
-                              clipBehavior: Clip.antiAliasWithSaveLayer,
-                              shape: const RoundedRectangleBorder(
-                                borderRadius: BorderRadiusDirectional.only(
-                                  topStart: Radius.circular(20.0),
-                                  bottomEnd: Radius.circular(20.0),
-                                ),
-                              ),
-                              child: Text(
-                                AppStrings.buy.toUpperCase(),
-                                style: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 15.0,
-                                ),
-                              ),
+                              builder: (context, state) {
+                                return MaterialButton(
+                                  onPressed: () {
+                                    CartCubit.get(context).addToCart(
+                                      productId: productModel.sId!,
+                                    );
+                                  },
+                                  clipBehavior: Clip.antiAliasWithSaveLayer,
+                                  shape: const RoundedRectangleBorder(
+                                    borderRadius: BorderRadiusDirectional.only(
+                                      topStart: Radius.circular(20.0),
+                                      bottomEnd: Radius.circular(20.0),
+                                    ),
+                                  ),
+                                  child: Text(
+                                    AppStrings.buy.toUpperCase(),
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 15.0,
+                                    ),
+                                  ),
+                                );
+                              },
                             ),
                           ),
                         ),

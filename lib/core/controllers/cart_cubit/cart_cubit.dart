@@ -1,6 +1,7 @@
 import 'package:e_commerce_app/core/managers/values.dart';
 import 'package:e_commerce_app/core/network/api_constants.dart';
 import 'package:e_commerce_app/core/network/remote/dio_helper.dart';
+import 'package:e_commerce_app/models/add_to_cart_model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
 import '../../../models/cart_model.dart';
@@ -34,6 +35,8 @@ class CartCubit extends Cubit<CartStates> {
     });
   }
 
+  AddToCartModel? cModel;
+
 // Add to cart
   void addToCart({required String productId}) {
     DioHelper.postData(
@@ -45,8 +48,9 @@ class CartCubit extends Cubit<CartStates> {
       },
     ).then((value) {
       print("value of add to cart is ${value.data} ");
+      cModel = value.data;
       //value of add to cart is {message: Product added to cart successfully,
-      emit(AddToCartSuccessState());
+      emit(AddToCartSuccessState(cModel?.status));
       getCartData();
     }).catchError((error) {
       print(error.toString());

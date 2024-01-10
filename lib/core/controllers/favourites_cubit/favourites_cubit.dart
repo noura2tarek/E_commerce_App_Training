@@ -1,7 +1,9 @@
 import 'package:e_commerce_app/core/managers/values.dart';
 import 'package:e_commerce_app/core/network/api_constants.dart';
 import 'package:e_commerce_app/core/network/remote/dio_helper.dart';
+import 'package:e_commerce_app/models/add_to%20favourites_model.dart';
 import 'package:e_commerce_app/models/favourites_model.dart';
+import 'package:flutter/materiaL.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
 
@@ -29,6 +31,7 @@ class FavouritesCubit extends Cubit<FavouritesState> {
       emit(GetFavouritesErrorState());
     });
   }
+AddToFavouritesModel? favModel;
 
 //Add to favourites
   void addToFavourites({required String productId}) {
@@ -40,12 +43,27 @@ class FavouritesCubit extends Cubit<FavouritesState> {
       },
     ).then((value) {
       print("value of add to favourites is ${value.data} ");
+      favModel = value.data;
       //value of add to favourites is {status: success, message: Product added to favorites}
-      emit(AddToFavouritesSuccessState());
+      emit(AddToFavouritesSuccessState(favModel?.status));
+      changeColor(productId: productId);
       getFavourites();
     }).catchError((error) {
       emit(AddToFavouritesErrorState());
     });
+  }
+
+  //change item color favourite (when add to favourites)
+  Color changeColor({required String productId}) {
+    Color color = Colors.grey;
+    if (favouritesModel?.favoriteProducts != null) {
+      favouritesModel?.favoriteProducts?.forEach((element) {
+        if (element.sId == productId) {
+          color = Colors.red;
+        }
+      });
+    }
+    return color;
   }
 
 //Delete from favourites
