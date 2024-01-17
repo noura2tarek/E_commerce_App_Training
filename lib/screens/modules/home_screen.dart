@@ -25,6 +25,7 @@ class HomeScreen extends StatelessWidget {
           condition: cubit.laptopsModel != null,
           builder: (context) {
             return Scaffold(
+              /* ----------------Drawer ----------------- */
               drawer: Drawer(
                 child: Padding(
                   padding: const EdgeInsetsDirectional.only(top: 11.0),
@@ -107,6 +108,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
               ),
+              /* ----------------App Bar ----------------- */
               appBar: AppBar(
                 title: const Text(AppStrings.products),
                 actions: [
@@ -123,7 +125,7 @@ class HomeScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      ///////*** List of products ***/////////
+                      /* --------------- List of products ---------------- */
                       GridView.count(
                         childAspectRatio: 1 / 1.3,
                         // width/height range of one element of grid view

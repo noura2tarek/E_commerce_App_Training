@@ -35,7 +35,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                 const SizedBox(
                   height: 20.0,
                 ),
-                ///////   New Password   /////
+                /* ------------- New Password String-------------- */
                 Text(
                   AppStrings.enterNewPassword,
                   style: Theme.of(context)
@@ -46,6 +46,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                 const SizedBox(
                   height: 13.0,
                 ),
+                /* ------------- New Password Form field-------------- */
                 Card(
                   surfaceTintColor: Colors.white.withOpacity(0.7),
                   child: Padding(
@@ -84,7 +85,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                   height: 15.0,
                 ),
 
-                /// ** Change password button **///
+                /* ------------- Change Password Button-------------- */
                 OutlinedButton(
                   child: const Text(
                     AppStrings.changePassword,

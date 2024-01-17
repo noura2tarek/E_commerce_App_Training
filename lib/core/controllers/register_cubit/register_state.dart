@@ -21,3 +21,5 @@ class RegisterErrorState extends RegisterState {
 class ChangePhotoSuccessState extends RegisterState{}
 
 class ChangePhotoErrorState extends RegisterState{}
+
+class ChangeGenderSuccessState extends RegisterState{}

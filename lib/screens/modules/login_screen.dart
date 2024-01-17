@@ -64,7 +64,7 @@ class LoginScreen extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      ///// title of page /////
+                      /* ----------------- Title of page ----------------- */
                       Text(
                         AppStrings.welcomeBack,
                         style: Theme.of(context).textTheme.headlineMedium,
@@ -76,12 +76,12 @@ class LoginScreen extends StatelessWidget {
                         AppStrings.loginNow,
                         style: Theme.of(context).textTheme.bodySmall,
                       ),
-                      ///// End of title of page /////
+                      /* ----------------- End of title of page ----------------- */
                       const SizedBox(
                         height: 30.0,
                       ),
 
-                      /////*******  form fields ******////////
+                      /* ---------------- Form fields ---------------- */
                       DefaultFormField(
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(8.0)),
@@ -121,8 +121,9 @@ class LoginScreen extends StatelessWidget {
                         },
                       ),
 
-                      /////*******  end of form fields  ******////////
-                      /// forget password button
+                      /* ----------------- End of Form fields ----------------- */
+
+                      /* -------------- Forget password Button --------------- */
                       DefaultTextButton(
                         text: AppStrings.forgotPassword,
                         fontSize: 13.0,
@@ -137,14 +138,21 @@ class LoginScreen extends StatelessWidget {
                         height: 25.0,
                       ),
 
-                      /////////     login button    /////////////
+                      /* -------------- Login Button --------------- */
                       ConditionalBuilder(
                         condition: state is! LoginLoadingState,
                         builder: (context) {
                           return DefaultButton(
                             alignment: AlignmentDirectional.bottomEnd,
                             backgroundColor: AppColors.primaryColor,
-                            text: AppStrings.login,
+                            buttonWidget: Text(
+                              AppStrings.login.toUpperCase(),
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w600,
+                                fontSize: 15.0,
+                              ),
+                            ),
                             function: () {
                               if (formKey.currentState!.validate()) {
                                 cubit.userLogin(
@@ -156,30 +164,21 @@ class LoginScreen extends StatelessWidget {
                           );
                         },
                         fallback: (context) {
-                          return Align(
-                            alignment: AlignmentDirectional.bottomEnd,
-                            child: Container(
-                              width: 140.0,
-                              height: 50.0,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10.0),
-                                color: AppColors.primaryColor,
-                              ),
-                              child: MaterialButton(
-                                onPressed: () {},
-                                child: CircularProgressIndicator(
-                                  color: Colors.white,
-                                  backgroundColor: AppColors.primaryColor,
-                                ),
-                              ),
+                          return DefaultButton(
+                            buttonWidget: CircularProgressIndicator(
+                              color: Colors.white,
+                              backgroundColor: AppColors.primaryColor,
                             ),
+                            backgroundColor: AppColors.primaryColor,
+                            function: () {},
+                            alignment: AlignmentDirectional.bottomEnd,
                           );
                         },
                       ),
-
                       const SizedBox(
                         height: 15.0,
                       ),
+                      /* -------------- Register Button if don't have account--------------- */
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [

@@ -27,7 +27,7 @@ class DefaultFormField extends StatelessWidget {
   const DefaultFormField({
     this.border,
     super.key,
-    this.height = 58.0,
+    this.height = 55.0,
     this.labelSize = 14.0,
     required this.type,
     required this.controller,
@@ -55,7 +55,10 @@ class DefaultFormField extends StatelessWidget {
     return SizedBox(
       height: height,
       child: TextFormField(
-        style: style,
+        style: const TextStyle(
+          fontSize: 16.0,
+          fontWeight: FontWeight.w400,
+        ),
         keyboardType: type,
         controller: controller,
         validator: validator,

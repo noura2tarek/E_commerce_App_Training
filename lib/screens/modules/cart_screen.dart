@@ -27,6 +27,7 @@ class CartScreen extends StatelessWidget {
                 icon: const Icon(Icons.arrow_back_ios),
               ),
             ),
+
             body: ConditionalBuilder(
               condition: cubit.cartModel != null,
               builder: (context) {
@@ -35,6 +36,7 @@ class CartScreen extends StatelessWidget {
                   child: SingleChildScrollView(
                     child: Column(
                       children: [
+                        /* ---------- List of products in cart ---------- */
                         if (cubit.cartModel!.products!.isNotEmpty)
                           ListView.separated(
                             shrinkWrap: true,
@@ -50,6 +52,7 @@ class CartScreen extends StatelessWidget {
                         const SizedBox(
                           height: 30.0,
                         ),
+                        /* ---------- Empty Cart string ---------- */
                         if (cubit.cartModel!.products!.isEmpty)
                           Text(
                             AppStrings.emptyCart,
@@ -62,6 +65,7 @@ class CartScreen extends StatelessWidget {
                           const SizedBox(
                             height: 15.0,
                           ),
+                        /* ---------- Apply coupon ---------- */
                         Padding(
                           padding: const EdgeInsets.all(10.0),
                           child: Container(
@@ -117,7 +121,8 @@ class CartScreen extends StatelessWidget {
               },
               fallback: (context) {
                 return const Scaffold(
-                    body: Center(child: CircularProgressIndicator()));
+                    body: Center(child: CircularProgressIndicator()),
+                );
               },
             ),
           );

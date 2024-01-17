@@ -23,6 +23,7 @@ class RegisterScreen extends StatelessWidget {
   final phoneController = TextEditingController();
   final nationalIdController = TextEditingController();
   final formKey = GlobalKey<FormState>();
+  final List<String> listOfGender = ["male", "female"];
 
   RegisterScreen({super.key});
 
@@ -62,24 +63,24 @@ class RegisterScreen extends StatelessWidget {
           appBar: AppBar(),
           body: Padding(
             padding: const EdgeInsetsDirectional.only(
-                bottom: 25.0, top: 4.0, start: 25.0, end: 25.0),
+                bottom: 25.0, start: 25.0, end: 25.0),
             child: SingleChildScrollView(
               child: Form(
                 key: formKey,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    ///// Title of page /////
+                    /* ------------Title of page ------------- */
                     Text(
                       AppStrings.register,
                       style: Theme.of(context).textTheme.headlineMedium,
                     ),
-                    ///// End of title of page /////
+                    /* ------------End of title of page ------------- */
                     const SizedBox(
-                      height: 25.0,
+                      height: 17.0,
                     ),
 
-                    /// profile  image  ///
+                    /* ------------Profile Photo ------------- */
                     ConditionalBuilder(
                       condition: (cubit.image != null),
                       builder: (context) {
@@ -135,9 +136,9 @@ class RegisterScreen extends StatelessWidget {
                       },
                     ),
                     const SizedBox(
-                      height: 15.0,
+                      height: 17.0,
                     ),
-                    /////******* form fields ******////////
+                    /* ---------------- Form fields ----------------- */
                     DefaultFormField(
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(8.0)),
@@ -237,15 +238,65 @@ class RegisterScreen extends StatelessWidget {
                     const SizedBox(
                       height: 15.0,
                     ),
-                    /////******* end of form fields ******////////
+                    /* ----------------End of form fields ----------------- */
 
-                    ////////  Register Button   ///////
+                    /* ------------ Gender Drop Down Menu ------------ */
+                    SizedBox(
+                      height: 55.0,
+                      child: DropdownMenu<String>(
+                        width: 118.0,
+                        menuHeight: 95.0,
+                        label: const Text('Select Gender'),
+                        initialSelection: listOfGender.first,
+                        dropdownMenuEntries: listOfGender
+                            .map<DropdownMenuEntry<String>>((String value) {
+                          return DropdownMenuEntry<String>(
+                            value: value,
+                            label: value,
+                          );
+                        }).toList(),
+                        textStyle: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 15.0,
+                          color: Colors.grey[800]!,
+                        ),
+                        menuStyle: MenuStyle(
+                          side: MaterialStateProperty.all(BorderSide.none),
+                          shape: MaterialStateProperty.all(LinearBorder(
+                            side: BorderSide(color: Colors.grey[300]!),
+                          )),
+                          elevation: MaterialStateProperty.all(1.0),
+                        ),
+                        inputDecorationTheme: InputDecorationTheme(
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(5.0),
+                            borderSide: BorderSide(color: Colors.grey[700]!),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(5.0),
+                            borderSide: BorderSide(color: Colors.grey[700]!),
+                          ),
+                        ),
+                        onSelected: (value) {
+                          cubit.selectGender(genderSelected: value);
+                        },
+                      ),
+                    ),
+
+                    /* ------------ Register Button ----------- */
                     ConditionalBuilder(
                       condition: state is! RegisterLoadingState,
                       builder: (context) {
                         return DefaultButton(
                           backgroundColor: AppColors.primaryColor,
-                          text: AppStrings.register,
+                          buttonWidget: Text(
+                            AppStrings.register.toUpperCase(),
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w600,
+                              fontSize: 15.0,
+                            ),
+                          ),
                           function: () {
                             if (formKey.currentState!.validate()) {
                               cubit.userRegister(
@@ -261,30 +312,21 @@ class RegisterScreen extends StatelessWidget {
                         );
                       },
                       fallback: (context) {
-                        return Align(
-                          alignment: AlignmentDirectional.bottomEnd,
-                          child: Container(
-                            width: double.infinity,
-                            height: 50.0,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(6.0),
-                              color: AppColors.primaryColor,
-                            ),
-                            child: MaterialButton(
-                              onPressed: () {},
-                              child: CircularProgressIndicator(
-                                color: Colors.white,
-                                backgroundColor: AppColors.primaryColor,
-                              ),
-                            ),
+                        return DefaultButton(
+                          buttonWidget: CircularProgressIndicator(
+                            color: Colors.white,
+                            backgroundColor: AppColors.primaryColor,
                           ),
+                          backgroundColor: AppColors.primaryColor,
+                          function: () {},
+                          alignment: AlignmentDirectional.bottomEnd,
                         );
                       },
                     ),
-
                     const SizedBox(
                       height: 5.0,
                     ),
+                    /* ------------ Login Button ----------- */
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [

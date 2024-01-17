@@ -11,6 +11,7 @@ import 'package:e_commerce_app/core/themes/theme_data/theme_data_light.dart';
 import 'package:e_commerce_app/screens/modules/home_screen.dart';
 import 'package:e_commerce_app/screens/modules/login_screen.dart';
 import 'package:e_commerce_app/screens/modules/on_boarding_screen.dart';
+import 'package:e_commerce_app/screens/modules/register_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'core/controllers/bloc_observer/bloc_observer.dart';
@@ -82,7 +83,7 @@ class MyApp extends StatelessWidget {
         themeMode: ThemeMode.light,
         theme: lightTheme,
         darkTheme: darkTheme,
-        home: startWidget,
+        home: RegisterScreen(),
       ),
     );
   }

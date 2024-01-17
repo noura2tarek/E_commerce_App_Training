@@ -1,15 +1,14 @@
 import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
-
 import 'package:e_commerce_app/core/network/api_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:meta/meta.dart';
 import '../../../models/user_model.dart';
+import '../../managers/app_strings.dart';
 import '../../network/remote/dio_helper.dart';
-
 part 'register_state.dart';
 
 class RegisterCubit extends Cubit<RegisterState> {
@@ -25,6 +24,13 @@ class RegisterCubit extends Cubit<RegisterState> {
   File? image;
   Uint8List? bytes;
   String? userImage;
+  String? gender = AppStrings.female;
+
+  //change gender method
+  void selectGender({String? genderSelected}){
+    gender = genderSelected;
+    emit(ChangeGenderSuccessState());
+  }
 
   //Register method to post register data to api by using dio
   void userRegister({
@@ -42,7 +48,7 @@ class RegisterCubit extends Cubit<RegisterState> {
         "name": name,
         "email": email,
         "password": password,
-        "gender" : "female",
+        "gender" : gender,
         "phone": phone,
         "nationalId" : nationalId,
         "profileImage" : userImage,
@@ -67,10 +73,10 @@ class RegisterCubit extends Cubit<RegisterState> {
         emit(ChangePhotoSuccessState());
       }
       else {
-        print('no image selected');
+        print(AppStrings.noImageSelected);
       }
     }).catchError((error) {
-      print('Error is occurred =>>  ${error.toString()}');
+      print('${AppStrings.errorIsOccurred}${error.toString()}');
       emit(ChangePhotoErrorState());
     });
   }

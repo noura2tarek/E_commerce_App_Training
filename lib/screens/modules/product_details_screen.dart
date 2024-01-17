@@ -53,12 +53,12 @@ class ProductDetailsScreen extends StatelessWidget {
                             if (state.status == "success") {
                               showToast(
                                 message:
-                                    " Item added to favourites successfully ",
+                                    AppStrings.itemAddedToFavourites,
                                 state: ToastStates.SUCCESS,
                               );
                             } else {
                               showToast(
-                                message: " There is an error",
+                                message: AppStrings.error,
                                 state: ToastStates.ERROR,
                               );
                             }
@@ -133,6 +133,7 @@ class ProductDetailsScreen extends StatelessWidget {
                 const SizedBox(
                   height: 40.0,
                 ),
+                /* ------------------- Product Details Data ------------------- */
                 Padding(
                   padding: const EdgeInsetsDirectional.only(
                     end: 16.0,
@@ -166,7 +167,7 @@ class ProductDetailsScreen extends StatelessWidget {
                         child: Row(
                           children: [
                             Text(
-                              "Count in Stock: ",
+                              AppStrings.countInStock,
                               style: Theme.of(context)
                                   .textTheme
                                   .bodySmall!
@@ -198,7 +199,7 @@ class ProductDetailsScreen extends StatelessWidget {
                         child: Row(
                           children: [
                             Text(
-                              ' Company: ',
+                              AppStrings.company,
                               style: Theme.of(context)
                                   .textTheme
                                   .bodySmall!
@@ -231,22 +232,21 @@ class ProductDetailsScreen extends StatelessWidget {
                               .copyWith(fontSize: 15.0),
                         ),
                       ),
-
                       const SizedBox(
                         height: 40.0,
                       ),
-                      ////////** Add to cart button **///////
+                      /* ----------------Add to cart button ----------------- */
                       BlocConsumer<CartCubit, CartStates>(
                         listener: (context, state) {
                           if (state is AddToCartSuccessState) {
                             if (state.status == "success") {
                               showToast(
-                                message: " Item added to Cart successfully ",
+                                message: AppStrings.itemAddedToCart,
                                 state: ToastStates.SUCCESS,
                               );
                             } else {
                               showToast(
-                                message: " There is an error",
+                                message: AppStrings.error,
                                 state: ToastStates.ERROR,
                               );
                             }
@@ -255,7 +255,14 @@ class ProductDetailsScreen extends StatelessWidget {
                         builder: (context, state) {
                           return DefaultButton(
                             backgroundColor: AppColors.primaryColor,
-                            text: AppStrings.addToCart,
+                            buttonWidget: Text(
+                              AppStrings.addToCart.toUpperCase(),
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w600,
+                                fontSize: 15.0,
+                              ),
+                            ),
                             function: () {
                               CartCubit.get(context).addToCart(
                                 productId: product.sId!,

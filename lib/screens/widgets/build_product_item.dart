@@ -180,12 +180,12 @@ Widget buildProductItem(ProductModel productModel, BuildContext context) {
                                   if (state.status == "success") {
                                     showToast(
                                       message:
-                                      " Item added to Cart successfully ",
+                                      AppStrings.itemAddedToCart,
                                       state: ToastStates.SUCCESS,
                                     );
                                   } else {
                                     showToast(
-                                      message: " There is an error",
+                                      message: AppStrings.error,
                                       state: ToastStates.ERROR,
                                     );
                                   }

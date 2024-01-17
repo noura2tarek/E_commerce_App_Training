@@ -47,6 +47,7 @@ class ProfileScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    /* ----------- User profile image & name ----------- */
                     Card(
                       surfaceTintColor: Colors.white.withOpacity(0.7),
                       child: SizedBox(
@@ -89,7 +90,7 @@ class ProfileScreen extends StatelessWidget {
                     const SizedBox(
                       height: 10.0,
                     ),
-                    /////// Email /////
+                    /* ----------- User Email String ----------- */
                     SizedBox(
                       height: 60.0,
                       child: Card(
@@ -118,7 +119,7 @@ class ProfileScreen extends StatelessWidget {
                     const SizedBox(
                       height: 10.0,
                     ),
-                    /////// Phone /////
+                    /* ----------- User Phone String ----------- */
                     SizedBox(
                       height: 60.0,
                       child: Card(
@@ -149,7 +150,7 @@ class ProfileScreen extends StatelessWidget {
                     const SizedBox(
                       height: 10.0,
                     ),
-                    /////// National Id /////
+                    /* ----------- National Id of user String ----------- */
                     SizedBox(
                       height: 60.0,
                       child: Card(
@@ -179,7 +180,7 @@ class ProfileScreen extends StatelessWidget {
                       height: 30.0,
                     ),
 
-                    /////*** Log out button *** /////
+                    /* ----------- Log out Button ----------- */
                     BlocConsumer<LoginCubit, LoginState>(
                       listener: (context, state) {},
                       builder: (context, state) {

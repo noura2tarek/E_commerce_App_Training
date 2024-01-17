@@ -36,6 +36,7 @@ class EditProfile extends StatelessWidget {
             ),
             centerTitle: true,
             actions: [
+              /* ---------- Update user Button ---------- */
               Padding(
                 padding: const EdgeInsetsDirectional.only(end: 5.0),
                 child: DefaultTextButton(
@@ -61,7 +62,7 @@ class EditProfile extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      /////  Update loading /////
+                      /* ---------- Update user loading ---------- */
                       if (state is UpdateProfileLoadingState)
                         const LinearProgressIndicator(),
                       if (state is UpdateProfileLoadingState)
@@ -69,7 +70,7 @@ class EditProfile extends StatelessWidget {
                           height: 7.0,
                         ),
 
-                      ///////   User Image   /////
+                      /* ----------- User Image----------- */
                       Card(
                         surfaceTintColor: Colors.white.withOpacity(0.7),
                         child: SizedBox(
@@ -140,7 +141,7 @@ class EditProfile extends StatelessWidget {
                       const SizedBox(
                         height: 10.0,
                       ),
-                      ///////   Name   /////
+                      /* ----------- User Name----------- */
                       Padding(
                         padding: const EdgeInsetsDirectional.only(start: 5.0),
                         child: Text(
@@ -154,6 +155,7 @@ class EditProfile extends StatelessWidget {
                       const SizedBox(
                         height: 5.0,
                       ),
+                      /* ----------- User Name form field ----------- */
                       Card(
                         surfaceTintColor: Colors.white.withOpacity(0.7),
                         child: Padding(
@@ -175,7 +177,7 @@ class EditProfile extends StatelessWidget {
                       const SizedBox(
                         height: 8.0,
                       ),
-                      /////// Email /////
+                      /* ----------- User Email ----------- */
                       Padding(
                         padding: const EdgeInsetsDirectional.only(start: 5.0),
                         child: Text(
@@ -189,6 +191,7 @@ class EditProfile extends StatelessWidget {
                       const SizedBox(
                         height: 5.0,
                       ),
+                      /* ---------- User Email form field ---------- */
                       Card(
                         surfaceTintColor: Colors.white.withOpacity(0.7),
                         child: Padding(
@@ -210,7 +213,7 @@ class EditProfile extends StatelessWidget {
                       const SizedBox(
                         height: 8.0,
                       ),
-                      /////// Phone /////
+                      /* ----------- User Phone ----------- */
                       Padding(
                         padding: const EdgeInsetsDirectional.only(start: 5.0),
                         child: Text(
@@ -224,6 +227,7 @@ class EditProfile extends StatelessWidget {
                       const SizedBox(
                         height: 5.0,
                       ),
+                      /* ---------- User Phone form field ---------- */
                       Card(
                         surfaceTintColor: Colors.white.withOpacity(0.7),
                         child: Padding(
