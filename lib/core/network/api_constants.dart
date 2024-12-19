@@ -12,7 +12,9 @@ class ApiConstants {
     static const String updateCartApi='$baseUrl/cart';
     static const String profileApi='$baseUrl/user/profile';
     static const String updateProfileApi='$baseUrl/user/update'; //
-    static const String favouritesApi='$baseUrl/favorite'; //https://elwekala.onrender.com/favorite
+    static const String favouritesApi='$baseUrl/favorite';
+    //https://elwekala.onrender.com/favorite
 
 
+//https://elwekala.onrender.com/favorite
 }

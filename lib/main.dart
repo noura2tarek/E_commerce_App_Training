@@ -31,22 +31,21 @@ void main() async {
   print("token is $token");
   print('boardingVar is $onBoarding');
   print('nationalId is $nationalId');
-  if (onBoarding != null) {
-    if (token != null) {
-      startWidget = HomeScreen();
-    } else {
-      startWidget = LoginScreen();
-    }
-  } else {
-    startWidget = OnBoardingScreen();
-  }
+  // if (onBoarding != null) {
+  //   if (token != null) {
+  //     startWidget = HomeScreen();
+  //   } else {
+  //     startWidget = LoginScreen();
+  //   }
+  // } else {
+  //   startWidget = OnBoardingScreen();
+  // }
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
@@ -70,11 +69,11 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => FavouritesCubit()..getFavourites(),
-          lazy: false,
+          lazy: true,
         ),
         BlocProvider(
           create: (context) => CartCubit()..getCartData(),
-          lazy: false,
+          lazy: true,
         ),
       ],
       child: MaterialApp(
@@ -83,7 +82,7 @@ class MyApp extends StatelessWidget {
         themeMode: ThemeMode.light,
         theme: lightTheme,
         darkTheme: darkTheme,
-        home: RegisterScreen(),
+        home: HomeScreen(),
       ),
     );
   }

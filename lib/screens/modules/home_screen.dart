@@ -46,7 +46,8 @@ class HomeScreen extends StatelessWidget {
                                   widget: const ProfileScreen()),
                               selectedTileColor: AppColors.primaryColor,
                               title: Text(
-                                "Hello, ${userModel?.user?.name}",
+                                "Hello, Noura Tarek",
+                                //"Hello, ${userModel?.user?.name}"
                                 //the name of the user
                                 style: Theme.of(context)
                                     .textTheme
@@ -57,7 +58,8 @@ class HomeScreen extends StatelessWidget {
                                     ),
                               ),
                               subtitle: Text(
-                                "${userModel?.user?.email}",
+                                "nourat536@gmail.com",
+                                //"${userModel?.user?.email}"
                                 //the email of the user
                                 style: Theme.of(context)
                                     .textTheme

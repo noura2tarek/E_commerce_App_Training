@@ -1,7 +1,6 @@
 import 'package:e_commerce_app/core/network/api_constants.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
-
 import '../../../models/products_model.dart';
 import '../../network/remote/dio_helper.dart';
 

@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:e_commerce_app/core/controllers/register_cubit/register_cubit.dart';
-import 'package:e_commerce_app/core/managers/images.dart';
+import 'package:e_commerce_app/core/managers/app_images.dart';
 import 'package:e_commerce_app/screens/modules/login_screen.dart';
 import 'package:e_commerce_app/screens/widgets/default_button.dart';
 import 'package:e_commerce_app/screens/widgets/default_text_button.dart';

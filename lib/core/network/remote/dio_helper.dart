@@ -7,6 +7,7 @@ class DioHelper {
     dio = Dio(
       BaseOptions(
         receiveDataWhenStatusError: true,
+
        // persistentConnection: false,
 
       ),

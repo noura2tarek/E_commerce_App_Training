@@ -106,28 +106,28 @@ Widget buildProductItem(ProductModel productModel, BuildContext context) {
                               ),
                             ),
                           ),
-                          if (productModel.status == "New")
-                            Expanded(
-                              flex: 1,
-                              child: Container(
-                                alignment: AlignmentDirectional.center,
-                                height: 30.0,
-                                decoration: BoxDecoration(
-                                  color: AppColors.secondColor,
-                                  borderRadius: const BorderRadius.horizontal(
-                                    left: Radius.circular(20.0),
-                                  ),
-                                ),
-                                child: const Text(
-                                  AppStrings.ten,
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 10.0,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                            ),
+                          // if (productModel.status == "New")
+                          //   Expanded(
+                          //     flex: 1,
+                          //     child: Container(
+                          //       alignment: AlignmentDirectional.center,
+                          //       height: 30.0,
+                          //       decoration: BoxDecoration(
+                          //         color: AppColors.secondColor,
+                          //         borderRadius: const BorderRadius.horizontal(
+                          //           left: Radius.circular(20.0),
+                          //         ),
+                          //       ),
+                          //       child: const Text(
+                          //         AppStrings.ten,
+                          //         style: TextStyle(
+                          //           color: Colors.white,
+                          //           fontSize: 10.0,
+                          //           fontWeight: FontWeight.bold,
+                          //         ),
+                          //       ),
+                          //     ),
+                          //   ),
                         ],
                       ),
                     ),
